@@ -1,0 +1,83 @@
+/* Card Styles */
+.card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Prize Styles */
+.prize-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+/* Timeline Styles */
+.timeline {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.timeline-item {
+  position: relative;
+  padding: 20px 40px;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: 20px;
+  top: 0;
+  width: 2px;
+  height: 100%;
+  background: #4f46e5;
+}
+
+/* Accordion Styles */
+.accordion {
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.accordion-header {
+  padding: 1rem 0;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+}
+
+.accordion.active .accordion-content {
+  max-height: 500px;
+}
+
+/* Footer Styles */
+.footer {
+  background: #1e293b;
+  color: white;
+  padding: 2rem 0;
+}
+
+.footer a {
+  color: #93c5fd;
+  transition: color 0.2s ease;
+}
+
+.footer a:hover {
+  color: #60a5fa;
+}
