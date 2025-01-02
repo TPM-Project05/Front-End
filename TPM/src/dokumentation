@@ -1,0 +1,30 @@
+POST Register
+Endpoint:
+URL: http://localhost:3000/api/register
+Method: POST
+
+Header : Content-Type: application/json
+
+request body : {
+  "name": "string",
+  "email": "string",
+  "password": "string"
+}
+
+response 
+{
+  "email": "string"
+}
+
+error handling: {
+  "message": "Validation failed",
+  "errors": {
+    "email": [
+      "The email has already been taken."
+    ],
+    "password": [
+      "The password must be at least 8 characters."
+    ]
+  }
+}
+
