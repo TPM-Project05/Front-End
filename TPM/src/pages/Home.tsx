@@ -12,7 +12,6 @@ import Faqs from './Faqs';
 import Sponsor from './Sponsor';
 import Media from './Media'; 
 import ContactUs from './ContactUs';
-import Footer from "./Footer";
 
 export default function NewHome() {
     return (
@@ -48,9 +47,6 @@ export default function NewHome() {
             <section id="contact">
                 <ContactUs />
             </section>           
-            <footer className="bg-[#1C0C5B]">
-                <Footer />
-            </footer>
         </>
     );
 }

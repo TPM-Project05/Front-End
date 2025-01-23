@@ -1,8 +1,15 @@
+import starBg from "../assets/Star Background.png"
+import { motion } from "framer-motion";
 
 export default function About() {
     return(
-        <>
-            <div className="font-poppins leading-tight flex flex-col items-center mx-16 text-white">
+        <div className="bg-gradient-to-b from-[#4339B2] to-[#17116B] py-20">
+            <motion.img
+                src={starBg}
+                className="absolute z-10 w-full pointer-events-none" 
+                alt="Moon"
+            />
+            <div className="font-poppins leading-tight flex flex-col items-center mx-16 text-white ">
                 <div className="text-[56px] text-glow text-white font-poppins mb-4">About Hackathon 8.0</div>
                 <div className="text-center px-4 text-xl">Hackathon is the peak event of TechnoScape that forms a 36-hour coding competition. It challenges
                     participants to create innovative applications or websites to solve real-world problems. Participants 
@@ -16,7 +23,7 @@ export default function About() {
                     </p>
                 </button>
             </div>
-        </>
+        </div>
     )
 }
 

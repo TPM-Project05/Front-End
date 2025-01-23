@@ -11,7 +11,7 @@ import HalamanAwal from "./HalamanAwal";
 
 export default function HomeSementara(){
     return(
-        <div className="w-[1280px] bg-[#050046] z-[-20]">
+        <div className="w-[1280px] z-[-20]">
             <HalamanAwal/>
             <About/>
             <Price/>
