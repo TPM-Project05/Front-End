@@ -2,6 +2,8 @@ import { createBrowserRouter, RouteObject } from "react-router-dom";
 import Home from "./pages/Home";
 import HomeSementara from "./pages/HomeSementara";
 import Example from "./pages/Example";
+import { AuroraBackground } from "./components/ui/aurora-background";
+import AuroraBack from "./pages/Aurora";
 
 const routes: RouteObject[] = [
     {
@@ -16,6 +18,10 @@ const routes: RouteObject[] = [
       path: '/coba1',
       element: <Example />,
     },
+    {
+      path: '/aurora',
+      element: <AuroraBack/>
+    }
   ];
   
   const router = createBrowserRouter(routes);

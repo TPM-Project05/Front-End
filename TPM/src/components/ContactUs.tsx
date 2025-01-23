@@ -1,5 +1,7 @@
 import ShimmerButton from "./ui/shimmer-button";
 import { Marquee } from "@/components/eldoraui/marquee";
+import { ShootingStars } from "@/components/ui/shooting-stars";
+import { StarsBackground } from "@/components/ui/stars-background";
 
 export default function ContactUs() {
     const companies = [
@@ -56,7 +58,7 @@ export default function ContactUs() {
       ];
 
     return (
-      <div>
+      <div className="">
         <div className="font-poppins leading-tight flex justify-center">
             <div className="text-[56px] text-glow text-white font-poppins">Media Partners</div>
         </div>
@@ -131,7 +133,6 @@ export default function ContactUs() {
                 </ShimmerButton>
                 </div>
               </form>
-  
             </div>
           </div>
         </div>

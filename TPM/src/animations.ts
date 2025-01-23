@@ -7,6 +7,10 @@ export const marqueeAnimation = {
     shimmer: "shimmer-slide var(--speed) ease-in-out infinite alternate",
     spin: "spin-around calc(var(--speed) * 2) infinite linear",
   };
+
+  export const fadeIn = {
+    fadeIn: "fadeIn var(--speed) ease-in-out"
+  }
   
   export const keyframes = {
     marquee: {
@@ -25,6 +29,10 @@ export const marqueeAnimation = {
       "15%, 35%": { transform: "translateZ(0) rotate(90deg)" },
       "65%, 85%": { transform: "translateZ(0) rotate(270deg)" },
       "100%": { transform: "translateZ(0) rotate(360deg)" },
+    },
+    "fadeIn": {
+      from: { opacity: 0 },
+      to: { opacity: 1 },
     },
   };
   

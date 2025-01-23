@@ -25,6 +25,8 @@ import Swal from 'sweetalert2'
 import { IoLocationOutline, IoCallOutline } from "react-icons/io5";
 import { MdOutlineEmail } from "react-icons/md";
 import { FaWhatsapp} from 'react-icons/fa';
+import { ShootingStars } from "@/components/ui/shooting-stars";
+import { StarsBackground } from "@/components/ui/stars-background";
 
 
 const footerNavigation = {
@@ -66,7 +68,7 @@ export default function Footer() {
   return (
     <div className="">
   <div>
-  <footer aria-labelledby="footer-heading" className="bg-[#1C0C5B]">
+  <footer aria-labelledby="footer-heading" className="">
   <div className="mx-[40px]">
     <div className="mx-10 flex justify-between h-[350px]">
       <div className="grid grid-cols-1">
@@ -204,9 +206,6 @@ export default function Footer() {
 
   </div>
 </footer>
-
-
-
   </div>
 </div>
 
