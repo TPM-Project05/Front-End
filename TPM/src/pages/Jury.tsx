@@ -71,3 +71,4 @@ const Jury = () => {
 };
 
 export default Jury;
+
