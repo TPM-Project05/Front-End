@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouteObject } from "react-router-dom";
 import Home from "./pages/Home";
-import Example from "./pages/Example";
+import Login from "./pages/Login";
 
 const routes: RouteObject[] = [
     {
@@ -8,8 +8,8 @@ const routes: RouteObject[] = [
       element: <Home />,
     },
     {
-      path: '/coba',
-      element: <Example />,
+      path: '/Login',
+      element: <Login />,
     },
   ];
   
