@@ -10,11 +10,19 @@ export default {
 	  "./src/**/*.{js,ts,jsx,tsx}",
 	  "./node_modules/@shadcn/**/*.{js,ts,jsx,tsx}",
 	],
+	fontFamily: {
+		'poppins': ['Poppins'],
+		sans: ['Poppins', 'sans-serif'],  // Mengganti font sans-serif default
+
+	 },
 	theme: {
 	  extend: {
 		fontFamily: {
 		  poppins: ['Poppins', 'sans-serif'],
 		},
+		backgroundImage: {
+        'catatanBg': 'linear-gradient(0deg, #17116B 3.44%, #4339B2 80.44%)',
+      },
 		borderRadius: {
 		  lg: 'var(--radius)',
 		  md: 'calc(var(--radius) - 2px)',
@@ -78,11 +86,12 @@ export default {
 		}
 	  }
 	},
-	plugins:[addVariablesForColors],
+	plugins:[addVariablesForColors, require('daisyui'),],
+	
   }
 
   // This plugin adds each Tailwind color as a global CSS variable, e.g. var(--gray-200).
-function addVariablesForColors({ addBase, theme }: any) {
+function addVariablesForColors({ addBase, theme }) {
 	let allColors = flattenColorPalette(theme("colors"));
 	let newVars = Object.fromEntries(
 	  Object.entries(allColors).map(([key, val]) => [`--${key}`, val])
