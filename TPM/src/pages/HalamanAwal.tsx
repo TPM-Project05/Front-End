@@ -7,7 +7,7 @@ import cloud from "../assets/Cloud Hero Section.png";
 
 export default function HalamanAwal() {
     return (
-        <div className="bg-[#050046] h-[740px]">
+        <div className="bg-[#050046] h-[740px] w-full">
             <motion.img
                 src={starBg}
                 className="absolute opacity-90 z-10 w-full" 
@@ -51,7 +51,7 @@ export default function HalamanAwal() {
 
             <motion.img
                 src={cloud}
-                className="absolute z-10 top-[50px]" 
+                className="absolute z-10 top-[50px] h-[710px] w-full" 
                 alt="Cloud"
             />
             

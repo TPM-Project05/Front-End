@@ -8,18 +8,22 @@ import Catatan from "./Catatan";
 import Price from "./Prize";
 import About from "./About";
 import HalamanAwal from "./HalamanAwal";
+import Sponsor from "./Sponsor";
+import MediaPartner from "./MediaPartner";
 
 export default function HomeSementara(){
     return(
-        <div className="w-[1280px] z-[-20]">
+        <div className=" z-[-20]">
             <HalamanAwal/>
             <About/>
             <Price/>
             <Catatan/>
             <Jury/>
             <ImageSlider/>
-            {/* <Mentors/> */}
+            {/* <Mentors/> */}  
             <Faq />
+            <Sponsor/>
+            <MediaPartner/>  
             <ContactUs/>
             <Footer/>
         </div>

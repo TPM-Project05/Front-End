@@ -4,6 +4,9 @@ import HomeSementara from "./pages/HomeSementara";
 import Example from "./pages/Example";
 import { AuroraBackground } from "./components/ui/aurora-background";
 import AuroraBack from "./pages/Aurora";
+import UserDashboard from "./pages/UserDashboard";
+import EditMember from "./pages/EditMember";
+import TeamList from "./pages/TeamList";
 
 const routes: RouteObject[] = [
     {
@@ -21,6 +24,18 @@ const routes: RouteObject[] = [
     {
       path: '/aurora',
       element: <AuroraBack/>
+    },
+    {
+      path: '/dashboard',
+      element: <UserDashboard/>
+    },
+    {
+      path: '/edit',
+      element: <EditMember/>
+    },
+    {
+      path: '/teamList',
+      element: <TeamList/>
     }
   ];
   

@@ -2,6 +2,10 @@ import nathasa from "../assets/nathasa.jpg";
 import nathasa2 from "../assets/nathasa2.jpg";
 import nathasa3 from "../assets/nathasa3.jpg";
 import { motion } from "framer-motion";
+import starBg from "../assets/Star Background.png";
+import AuroraLeft from "../assets/Aurora Left.png"
+import AuroraRight from "../assets/Aurora Right.png"
+
 
 const Jury = () => {
   // Array of objects that combines name, image, and position
@@ -26,12 +30,29 @@ const Jury = () => {
   };
 
   return (
+    
+    <div className="bg-[#17116B] z-[-10]">
+      <motion.img
+                src={starBg}
+                className="absolute w-full" 
+                alt="Moon"
+            />
+            <motion.img
+                src={AuroraLeft}
+                className="absolute w-full h-[490px]" 
+                alt="Moon"
+            />
+            <motion.img
+                src={AuroraRight}
+                className="absolute w-full h-[490px]" 
+                alt="Moon"
+            />
     <motion.div
       initial={{ opacity: 0.0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.3, duration: 0.8, ease: "easeInOut" }}
-      className="items-center justify-center h-[500px]"
-    >
+      className="items-center justify-center h-[500px] z-[-20]"
+      >
       <div className="font-poppins leading-tight flex justify-center">
         <div className="text-[56px] text-glow text-white font-poppins">Meet Our Jury</div>
       </div>
@@ -40,10 +61,10 @@ const Jury = () => {
           const position = positions[index % data.length];
           return (
             <motion.div
-              key={index}
-              className="h-[310px] w-[210px] rounded-[15px] shadow-lg p-4 bg-[#3D2C8D]"
-              initial="center"
-              animate={position}
+            key={index}
+            className="h-[310px] w-[210px] rounded-[15px] shadow-lg p-4 bg-[#3D2C8D]"
+            initial="center"
+            animate={position}
               variants={imageVariants}
               whileHover={hoverVariants} // Apply hover effects
               transition={{ duration: 0.5 }}
@@ -55,7 +76,7 @@ const Jury = () => {
                     src={item.image}
                     alt={`image-${index}`}
                     className="h-[205px] w-[160px] rounded-[30px] m-2"
-                  />
+                    />
                 </div>
               </div>
               <div className="text-center text-white mt-2">
@@ -67,6 +88,7 @@ const Jury = () => {
         })}
       </div>
     </motion.div>
+          </div>
   );
 };
 

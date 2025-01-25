@@ -11,6 +11,7 @@ import abel4 from "../assets/abel4.jpg";
 import { HiArrowCircleRight } from "react-icons/hi";
 import { HiArrowCircleLeft } from "react-icons/hi";
 import { motion } from "framer-motion";
+import starBg from "../assets/Star Background.png";
 
 const ImageSlider = () => {
   // Array of objects that combines name, image, and position
@@ -54,7 +55,12 @@ const ImageSlider = () => {
   };
 
   return (
-    <>
+    <div className="bg-gradient-to-b from-[#17116B] to-[#050046]">
+      <motion.img
+                src={starBg}
+                className="absolute w-full" 
+                alt="Moon"
+            />
         <motion.div
           initial={{ opacity: 0.0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -103,7 +109,7 @@ const ImageSlider = () => {
             />
           </div>
         </motion.div>
-    </>
+    </div>
   );
 };
 
