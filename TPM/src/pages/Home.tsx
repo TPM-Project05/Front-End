@@ -30,5 +30,44 @@ export default function NewHome() {
             <div id="contactUs"><ContactUs/></div>
             <Footer/>
         </div>
+
+import Media from './Media'; 
+import ContactUs from './ContactUs';
+
+export default function NewHome() {
+    return (
+        <> 
+            <header>
+                <Navbar />
+            </header>
+            <section id="home">
+                <Page />
+            </section>
+            <section id="about">
+                <About />
+            </section>
+            <section id="prizes">
+                <Prize />
+            </section>
+            <section id="mentors">
+                <Mentor />
+                <Jury />
+            </section>
+            <section id="timeline">
+                <Timeline />
+            </section>
+            <section id="faq">
+                <Faqs />
+            </section>
+            <section id="sponsor">
+                <Sponsor />
+            </section>
+            <section id="media">
+                <Media />
+            </section>
+            <section id="contact">
+                <ContactUs />
+            </section>           
+        </>
     );
 }

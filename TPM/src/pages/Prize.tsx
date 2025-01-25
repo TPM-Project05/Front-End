@@ -1,9 +1,67 @@
 import { GiTrophyCup } from "react-icons/gi";
 import { CiBag1 } from "react-icons/ci";
+import awan from "../assets/awan price.png"
+import { motion } from "motion/react"
+import starBg from "../assets/Star Background.png"
+import star from "../assets/starPrize.png"
+
 
 export default function Price() {
     return (
-        <>
+        <div className="bg-[#17116B] h-[850px]">
+            <motion.img
+                src={starBg}
+                className="absolute z-10 w-full pointer-events-none" 
+                alt="Moon"
+            />
+            {/* Star Prize 1 */}
+            <div className="flex justify-center">
+                <motion.img
+                    src={star}
+                    className="absolute z-10 w-[36px] h-[33px] pointer-events-none mt-[177px] mr-[112px]"
+                    alt="Moon"
+                />
+            </div>
+            <div className="flex justify-center">
+                <motion.img
+                    src={star}
+                    className="absolute z-10 w-[36px] h-[33px] pointer-events-none mt-[177px] mr-[41px]"
+                    alt="Moon"
+                />
+            </div>
+            <div className="flex justify-center">
+                <motion.img
+                    src={star}
+                    className="absolute z-10 w-[36px] h-[33px] pointer-events-none mt-[177px] ml-[30px]"
+                    alt="Moon"
+                />
+            </div>
+
+            {/* Star Prize 2 */}
+            <div className="flex justify-normal">
+                <motion.img
+                    src={star}
+                    className="absolute z-10 w-[40px] h-[33px] pointer-events-none mt-[260px] ml-[230px] -rotate-[14deg]"
+                    alt="Star"
+                />
+            </div>
+            <div className="flex justify-normal">
+                <motion.img
+                    src={star}
+                    className="absolute z-10 w-[40px] h-[33px] pointer-events-none mt-[269px] ml-[190px] -rotate-[14deg]"
+                    alt="Star"
+                />
+            </div>
+
+            {/* Star Prize 2 */}
+            <div className="flex justify-center">
+                <motion.img
+                    src={star}
+                    className="absolute z-10 w-[36  px] h-[33px] pointer-events-none mt-[310px] ml-[739px] rotate-[14deg]"
+                    alt="Star"
+                />
+            </div>
+
         <div className="font-poppins leading-tight flex justify-center">
                 <div className="text-[20px] text-white font-poppins">Total prize of</div>
             </div>
@@ -112,8 +170,13 @@ export default function Price() {
                         </div>
                 </div>
             </div>
+            <motion.img
+                src={awan}
+                    className="absolute mt-[670px] z-[20] pointer-events-none" 
+                alt="Moon"
+            />
             </div>
-        </>
+        </div>
     );
 }
 
