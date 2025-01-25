@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { Link } from "react-router-dom";
+import { BsArrowLeftCircle } from "react-icons/bs";
 
 const Login = () => {
   const navigate = useNavigate(); 
@@ -19,10 +20,17 @@ const Login = () => {
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-gradient-to-b from-indigo-950 via-indigo-750 to-indigo-600 w-full bg-cover bg-center">
       <button 
-        onClick={() => navigate(-1)}
-        className="absolute top-4 left-4 border border-gray-300 rounded-full px-4 py-2 text-white"
+          onClick={() => navigate(-1)}
+          className="absolute top-4 left-4 text-white transition-all duration-300 ease-in-out"
       >
-        Back
+        <div className="ml-[43px] border-2 w-[120px] h-[40px] z-20 rounded-[16px] justify-center items-center
+              hover:border-[#ffff] hover:scale-105 hover:shadow-md hover:shadow-[#ffff]/50 
+              active:border-[#ffff] active:scale-100 active:shadow-xl active:shadow-[#ffff]">
+              <div className="flex justify-normal p-[7px] gap-5 items-center">
+                  <BsArrowLeftCircle size={24} />
+                  <p className="text-white">back</p>
+                </div>
+        </div>
       </button>
       
       <form onSubmit={handleSubmit} className="w-full max-w-md mx-auto p-10 border rounded-xl shadow-lg bg-white bg-opacity-15">
@@ -60,7 +68,7 @@ const Login = () => {
         </div>
         <button type="submit" className="bg-blue-500 text-white rounded p-2 mt-4 w-full">Sign In</button>
         <p className="text-center text-white mt-4">
-          Don't have an account? <Link to="/register" className="text-white hover:underline text-glow">Sign Up</Link>
+          Don't have an account? <Link to="/Register" className="text-white hover:underline text-glow">Sign Up</Link>
         </p>
       </form>
     </div>
