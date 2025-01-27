@@ -7,12 +7,13 @@ import Sponsor from './Sponsor';
 import ContactUs from '@/components/ContactUs';
 import Footer from "../components/Footer";
 import ImageSlider from '@/components/ImageSlider';
-import Faqs from "./Faqs";
+import Faq from "./Faq";
 import Jury from "./Jury";
 import Catatan from "./Catatan";
 import Price from "./Prize";
 import About from "./About";
 import HalamanAwal from "./HalamanAwal";
+import MediaPartner from "./MediaPartner";
 
 export default function NewHome() {
     return (
@@ -22,11 +23,11 @@ export default function NewHome() {
             <div id="about"><About/></div>
             <div id="prize"><Price/></div>
             <div id="catatan"><Catatan/></div>
-            <div id="imageslider"><ImageSlider/></div>
             <div id="jury"><Jury/></div>
-            <div id="timeline"><Timeline/></div>
-            <div id="faqs"><Faqs/></div>
+            <div id="imageslider"><ImageSlider/></div>
+            <div id="faqs"><Faq/></div>
             <div id="sponsor"><Sponsor/></div>
+            <MediaPartner/>  
             <div id="contactUs"><ContactUs/></div>
             <Footer/>
         </div>

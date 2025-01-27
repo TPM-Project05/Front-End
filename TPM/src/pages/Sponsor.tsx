@@ -10,10 +10,10 @@ import awan from "../assets/Cloud 2 Home.png"
 
 const Sponsor = () => {
     return (
-        <section className="bg-gradient-to-b from-[#17116B] to-[#6860CB] w-full bg-cover bg-center text-white  pb-[170px]">
+        <section className="bg-gradient-to-b from-[#17116B] to-[#6860CB] w-full bg-cover bg-center text-white  pb-[170px] z-[-10]">
             <motion.img
                 src={starBg}
-                className="absolute w-full h-[200px] pointer-events-none" 
+                className="absolute w-full h-[500px] pointer-events-none mt-[-80px]" 
                 alt="Star"
             />
             <motion.img

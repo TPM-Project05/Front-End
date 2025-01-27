@@ -4,8 +4,6 @@ import nathasa3 from "../assets/nathasa3.jpg";
 import { motion } from "framer-motion";
 import starBg from "../assets/Star Background.png";
 import AuroraLeft from "../assets/Aurora Left.png"
-import AuroraRight from "../assets/Aurora Right.png"
-
 
 const Jury = () => {
   // Array of objects that combines name, image, and position
@@ -31,7 +29,7 @@ const Jury = () => {
 
   return (
     
-    <div className="bg-[#17116B] z-[-10]">
+    <div className="bg-[#17116B] z-[-10] overflow-hidden">
       <motion.img
                 src={starBg}
                 className="absolute w-full" 
@@ -39,13 +37,14 @@ const Jury = () => {
             />
             <motion.img
                 src={AuroraLeft}
-                className="absolute w-full h-[490px]" 
-                alt="Moon"
+                className="absolute left-[-160px] w-full h-[490px]" 
+                alt="Aurora Left"
             />
             <motion.img
-                src={AuroraRight}
-                className="absolute w-full h-[490px]" 
-                alt="Moon"
+                src={AuroraLeft}
+                className="absolute right-[-160px] w-full h-[490px]
+                transform -scale-x-100" 
+                alt="Mirror Aurora Left"
             />
     <motion.div
       initial={{ opacity: 0.0, y: 40 }}
