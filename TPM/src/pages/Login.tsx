@@ -1,53 +1,66 @@
 import React, { useState } from 'react';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { FaEye, FaEyeSlash, FaLock, FaUser } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
-import { Link } from "react-router-dom";
-import { BsArrowLeftCircle } from "react-icons/bs";
+import { Link } from 'react-router-dom';
+import { BsArrowLeftCircle } from 'react-icons/bs';
 import awan from "../assets/awan price.png";
 import { motion } from "motion/react";
 import starBg from "../assets/Star Background.png";
 import star from "../assets/Star.png";
-import { FaUser, FaLock } from "react-icons/fa"; // Import additional icons
+import axios from '../config/instance';  // Import axios for API calls
 
 const Login = () => {
   const navigate = useNavigate();
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
+  
+  // Define state for formData and showPassword
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+    showPassword: false,
+    error: '',
+  });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // Handle input change for email and password
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData(prevState => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  // Handle password visibility toggle
+  const handleTogglePassword = () => {
+    setFormData(prevState => ({
+      ...prevState,
+      showPassword: !prevState.showPassword,
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const errors = [];
 
-    // Validate email
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!username) {
-        errors.push("Email is required.");
-    } else if (!emailRegex.test(username)) {
-        errors.push("Please enter a valid email address.");
+    try {
+      // Send login request to the server
+      const response = await axios.post('/login', {
+        email: formData.email,
+        password: formData.password,
+      });
+
+      if (response.status === 200) {
+        // Successful login, redirect to dashboard or home
+        navigate('/dashboard');
+      }
+
+      const token = response.data?.token;
+      localStorage.setItem('access_token', JSON.stringify(token));
+    } catch (error) {
+      console.error('Login failed:', error);
+      setFormData(prevState => ({
+        ...prevState,
+        error: 'Invalid email or password',
+      }));
     }
-
-    // Validate password
-    if (!password) {
-        errors.push("Password is required.");
-    } else if (password.length < 6) {
-        errors.push("Password must be at least 6 characters long.");
-    } else if (!/[A-Z]/.test(password)) {
-        errors.push("Password must contain at least one uppercase letter.");
-    } else if (!/[a-z]/.test(password)) {
-        errors.push("Password must contain at least one lowercase letter.");
-    } else if (!/[0-9]/.test(password)) {
-        errors.push("Password must contain at least one number.");
-    }
-
-    if (errors.length > 0) {
-        alert(errors.join("\n"));
-        return;
-    }
-
-    // Proceed with login logic
-    console.log('Email:', username);
-    console.log('Password:', password);
   };
 
   return (
@@ -68,9 +81,9 @@ const Login = () => {
         alt="Star 3"
         animate={{ rotate: 360 }} 
         transition={{
-        duration: 20, 
-        repeat: Infinity, 
-        ease: "linear", 
+          duration: 20, 
+          repeat: Infinity, 
+          ease: "linear", 
         }}    
       />
       <motion.img
@@ -79,9 +92,9 @@ const Login = () => {
         alt="Star 3"
         animate={{ rotate: 360 }} 
         transition={{
-        duration: 20, 
-        repeat: Infinity, 
-        ease: "linear", 
+          duration: 20, 
+          repeat: Infinity, 
+          ease: "linear", 
         }}    
       />
       <motion.img
@@ -90,9 +103,9 @@ const Login = () => {
         alt="Star 3"
         animate={{ rotate: 360 }} 
         transition={{
-        duration: 20, 
-        repeat: Infinity, 
-        ease: "linear", 
+          duration: 20, 
+          repeat: Infinity, 
+          ease: "linear", 
         }}    
       />
       <motion.img
@@ -101,9 +114,9 @@ const Login = () => {
         alt="Star 3"
         animate={{ rotate: 360 }} 
         transition={{
-        duration: 20, 
-        repeat: Infinity, 
-        ease: "linear", 
+          duration: 20, 
+          repeat: Infinity, 
+          ease: "linear", 
         }}    
       />
       <button 
@@ -123,48 +136,58 @@ const Login = () => {
       <div className="flex-col items-center justify-center h-[450px] w-full max-w-md mt-[-100px]">
         <form onSubmit={handleSubmit} className="w-full p-10 border-l-0 border-t-0 border-r-2 border-b-2 rounded-xl shadow-lg bg-white bg-opacity-15 backdrop-blur-lg flex flex-col items-center"
           style={{
-          boxShadow: '10px 10px 20px rgba(255, 255, 255, 0.4)'
+            boxShadow: '10px 10px 20px rgba(255, 255, 255, 0.4)',
           }}
         >
-          <h2 className="text-center text-4xl  mb-4 text-white text-glow font-poppins p-2">Welcome Back</h2> 
+          <h2 className="text-center text-4xl mb-4 text-white text-glow font-poppins p-2">Welcome Back</h2>
+          
           <div className="mb-4 w-full relative">
-            <label htmlFor="username" className="block text-sm font-medium text-white font-poppins">Team Name</label>
+            <label htmlFor="email" className="block text-sm font-medium text-white font-poppins">Email</label>
             <div className="relative">
               <FaUser className="absolute left-3 top-5 text-gray-500" />
               <input
-                type="text"
-                id="username"
-                placeholder='Team Name'
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Enter your email"
+                value={formData.email}
+                onChange={handleChange}
                 required
                 className="border rounded pl-10 p-4 w-full bg-white text-black"
               />
             </div>
           </div>
+          
           <div className="mb-4 w-full relative">
             <label htmlFor="password" className="block text-sm font-medium text-white font-poppins">Password</label>
             <div className="relative">
               <FaLock className="absolute left-3 top-5 text-gray-500" />
               <input
-                type={showPassword ? 'text' : 'password'}
+                type={formData.showPassword ? 'text' : 'password'}
                 id="password"
-                placeholder='Password'
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                name="password"
+                placeholder="Enter your password"
+                value={formData.password}
+                onChange={handleChange}
                 required
                 className="border rounded pl-10 p-4 w-full bg-white text-black pr-10"
               />
               <button 
                 type="button" 
-                onClick={() => setShowPassword(!showPassword)} 
+                onClick={handleTogglePassword} 
                 className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500"
               >
-                {showPassword ? <FaEye />: <FaEyeSlash />}
+                {formData.showPassword ? <FaEye /> : <FaEyeSlash />}
               </button>
             </div>
           </div>
+          
+          {formData.error && (
+            <p className="text-red-500 text-center mb-4">{formData.error}</p>
+          )}
+
           <button type="submit" className="bg-gradient-to-b from-indigo-950 via-indigo-750 to-indigo-600 text-white rounded p-2 mt-4 w-full">Sign In</button>
+          
           <p className="text-center text-white mt-4">
             Don't have an account? <Link to="/Register" className="text-white hover:underline text-glow">Sign Up</Link>
           </p>

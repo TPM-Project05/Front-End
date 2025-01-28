@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import { BsArrowLeftCircle } from "react-icons/bs";
@@ -8,66 +8,99 @@ import starBg from "../assets/Star Background.png";
 import moon from "../assets/Moon.png";
 import star from "../assets/Star.png";
 import { FaUser, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
+import axios from '../config/instance'; // Import AxiosError for error typing
+import { AxiosError } from 'axios'
 
-const Register = () => {
+type CreateUserResponse = {
+    name: string;
+    email: string;
+    role: string;
+    status: string;
+    password: string;
+    password_confirmation: string;
+  };
+  
+  const Register = () => {
     const navigate = useNavigate();
-    const [name, setName] = useState('');  
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
-
-    const [isBinusian, setIsBinusian] = useState(true);
-    const [showPassword, setShowPassword] = useState(false);
-    const [showconfirmPassword, setShowconfirmPassword] = useState(false);
-
-
-    const handleSubmit = (e: React.FormEvent) => {
+    const [error, setError] = useState<string>('');
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        password: '',
+        confirmPassword: '', // Untuk confirm password terpisah
+        isBinusian: true,
+        showPassword: false,
+        showConfirmPassword2: false, // Untuk confirm password visibility
+        error: '',
+      });
+      
+    
+      // Handle form submission
+      const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const errors = [];
-    
-        // Validate email
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!teamName) {
-            errors.push("Email is required.");
-        } else if (!emailRegex.test(teamName)) {
-            errors.push("Please enter a valid email address.");
+      
+        // Memastikan password dan confirmPassword cocok
+        if (formData.password !== formData.confirmPassword) {
+          setFormData((prevData) => ({
+            ...prevData,
+            error: 'Passwords do not match',
+          }));
+          return;
         }
-    
-        // Validate password
-        if (!password) {
-            errors.push("Password is required.");
-        } else if (password.length < 6) {
-            errors.push("Password must be at least 6 characters long.");
-        } else if (!/[A-Z]/.test(password)) {
-            errors.push("Password must contain at least one uppercase letter.");
-        } else if (!/[a-z]/.test(password)) {
-            errors.push("Password must contain at least one lowercase letter.");
-        } else if (!/[0-9]/.test(password)) {
-            errors.push("Password must contain at least one number.");
+      
+        const userData: CreateUserResponse = {
+          name: formData.name,
+          email: formData.email,
+          password: formData.password,
+          password_confirmation: formData.confirmPassword, // Pastikan nama key sesuai dengan backend
+          role: "participant",
+          status: formData.isBinusian ? 'Binusian' : 'Non-Binusian',
+        };
+      
+        try {
+          const response = await axios.post('/register', userData);
+          if (response.status === 201) {
+            navigate('/Login'); // Redirect to login page after successful registration
+          }
+        } catch (error) {
+          const axiosError = error as AxiosError;
+          setFormData((prevData) => ({
+            ...prevData,
+            error: axiosError.response?.data?.message || 'Something went wrong, please try again.',
+          }));
         }
+      };
+      
     
-        // Validate confirm password
-        if (!confirmPassword) {
-            errors.push("Please confirm your password.");
-        } else if (password !== confirmPassword) {
-            errors.push("Passwords do not match.");
-        }
+      // Handle input changes
+      const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+      
+        // Log the input field name and its new value
+        console.log(`Field: ${name}, Value: ${value}`);
+      
+        setFormData((prevData) => ({
+          ...prevData,
+          [name]: value,
+        }));
+      };
+      
     
-        if (errors.length > 0) {
-            alert(errors.join("\n"));
-            return;
-        }
-    
-        // Proceed with registration logic
-        console.log('Email:', teamName);
-        console.log('Password:', password);
-    };
+      // Handle checkbox changes (for the radio buttons or password visibility toggles)
+      const handleToggle = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, checked } = e.target;
+        setFormData((prevData) => ({
+          ...prevData,
+          [name]: checked,
+        }));
+      };
+        
 
     return (
         <div className="flex items-center justify-center min-h-screen bg-gradient-to-b from-indigo-950 via-indigo-750 to-indigo-600 w-full bg-cover bg-center relative h-full overflow-hidden">
             <motion.img
                 src={starBg}
-                className="absolute top-0 w-full h-[500px] pointer-events-none z-5" 
+                className="absolute top-0 w-full h-[500px] pointer-events-none z-10" 
                 alt="Star"
             />
             <motion.img
@@ -107,7 +140,6 @@ const Register = () => {
                     repeat: Infinity, 
                     ease: "linear", 
                 }}
-            
             />
             <motion.img
                 src={star}
@@ -119,7 +151,6 @@ const Register = () => {
                     repeat: Infinity, 
                     ease: "linear", 
                 }}
-            
             />
             
             <button 
@@ -141,70 +172,98 @@ const Register = () => {
                     <div className="flex-1">
                         <h2 className="absolute left-[150px] top-[100px] text-left text-7xl font-bold mb-4 text-white text-glow font-poppins">Register <br />Your Team!</h2>
                     </div>
-                    <form onSubmit={handleSubmit} className="w-full max-w-md mx-auto mt-[-100px] p-10 border-l-2 border-t-0 border-r-2 border-b-0 rounded-xl shadow-lg bg-white bg-opacity-15"
+                    <form onSubmit={handleSubmit} className="w-full max-w-md mx-auto mt-[-100px] p-10 border-l-2 border-t-0 
+                    border-r-2 border-b-0 rounded-xl shadow-lg bg-white bg-opacity-15 z-20"
                         style={{
                         boxShadow: '10px 0 10px rgba(255, 255, 255, 0.4), -10px 0 10px rgba(255, 255, 255, 0.4)'
                         }}
                     >
                         <div className="mb-4 w-full relative">
-                            <label htmlFor="username" className="block text-sm font-medium text-white font-poppins">Team Name</label>
+                            <label htmlFor="name" className="block text-sm font-medium text-white font-poppins">Team Name</label>
                             <div className="relative">
                                 <FaUser className="absolute left-3 top-5 text-gray-500" />
                                 <input
                                     type="text"
-                                    id="teamName"
+                                    id="name"
+                                    name='name'
                                     placeholder='Team Name'
-                                    value={teamName}
-                                    onChange={(e) => setTeamName(e.target.value)}
+                                    value={formData.name}
+                                    onChange={handleChange}
                                     required
                                     className="border rounded pl-10 p-4 w-full bg-white text-black"
                                     />
                                 </div>
                         </div>
                         <div className="mb-4 w-full relative">
-                            <label htmlFor="password" className="block text-sm font-medium text-white font-poppins">Password</label>
+                            <label htmlFor="email" className="block text-sm font-medium text-white font-poppins">Team Name</label>
                             <div className="relative">
-                                <FaLock className="absolute left-3 top-5 text-gray-500" />
+                                <FaUser className="absolute left-3 top-5 text-gray-500" />
                                 <input
-                                    type={showPassword ? 'text' : 'password'}
-                                    id="password"
-                                    placeholder='Password'
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
+                                    type="email"
+                                    id="email"
+                                    name='email'
+                                    placeholder='Your Email'
+                                    value={formData.email}
+                                    onChange={handleChange}
                                     required
-                                    className="border rounded pl-10 p-4 w-full bg-white text-black pr-10"
-                                />
-                            </div>
-                            <button 
-                                type="button" 
-                                onClick={() => setShowPassword(!showPassword)} 
-                                className="absolute inset-y-0 right-0 pt-5 pr-3 flex items-center text-gray-500"
-                                >
-                                {showPassword ? <FaEye />: <FaEyeSlash />}
-                            </button>
+                                    className="border rounded pl-10 p-4 w-full bg-white text-black"
+                                    />
+                                </div>
                         </div>
                         <div className="mb-4 w-full relative">
-                            <label htmlFor="confirmPassword" className="block text-sm font-medium text-white font-poppins">Confirm Password</label>
-                            <div className="relative">
-                                <FaLock className="absolute left-3 top-5 text-gray-500" />
-                                <input
-                                    type={showconfirmPassword ? 'text' : 'Password'}
-                                    id="confirmPassword"
-                                    placeholder='Confirm Password'
-                                    value={confirmPassword}
-                                    onChange={(e) => setConfirmPassword(e.target.value)}
-                                    required
-                                    className="border rounded pl-10 p-4 w-full bg-white text-black pr-10"
-                                />
-                            </div>
-                            <button 
-                                type="button" 
-                                onClick={() => setShowconfirmPassword(!showconfirmPassword)} 
-                                className="absolute inset-y-0 right-0 pt-5 pr-3 flex items-center text-gray-500"
-                                >
-                                {showconfirmPassword ? <FaEye />: <FaEyeSlash />}
-                            </button>
+                        <label htmlFor="password" className="block text-sm font-medium text-white font-poppins">Password</label>
+                        <div className="relative">
+                            <FaLock className="absolute left-3 top-5 text-gray-500" />
+                            <input
+                            type={formData.showPassword ? 'text' : 'password'}  // Toggle visibility
+                            id="password"
+                            placeholder='Password'
+                            name='password'  // Gunakan nama field 'password'
+                            value={formData.password}  // Bind value ke formData.password
+                            onChange={handleChange}
+                            required
+                            className="border rounded pl-10 p-4 w-full bg-white text-black pr-10"
+                            />
                         </div>
+                        <button 
+                            type="button" 
+                            onClick={() => setFormData((prevData) => ({
+                            ...prevData,
+                            showPassword: !prevData.showPassword,
+                            }))}
+                            className="absolute inset-y-0 right-0 pt-5 pr-3 flex items-center text-gray-500"
+                        >
+                            {formData.showPassword ? <FaEye /> : <FaEyeSlash />}
+                        </button>
+                        </div>
+
+                        <div className="mb-4 w-full relative">
+                        <label htmlFor="password_confirmation" className="block text-sm font-medium text-white font-poppins">Confirm Password</label>
+                        <div className="relative">
+                            <FaLock className="absolute left-3 top-5 text-gray-500" />
+                            <input
+                            type={formData.showConfirmPassword2 ? 'text' : 'password'}  // Toggle visibility
+                            id="password_confirmation"
+                            placeholder='Confirm Password'
+                            name='confirmPassword'  // Gunakan nama field 'confirmPassword'
+                            value={formData.confirmPassword}  // Bind value ke formData.confirmPassword
+                            onChange={handleChange}
+                            required
+                            className="border rounded pl-10 p-4 w-full bg-white text-black pr-10"
+                            />
+                        </div>
+                        <button 
+                            type="button" 
+                            onClick={() => setFormData((prevData) => ({
+                            ...prevData,
+                            showConfirmPassword2: !prevData.showConfirmPassword2,
+                            }))}
+                            className="absolute inset-y-0 right-0 pt-5 pr-3 flex items-center text-gray-500"
+                        >
+                            {formData.showConfirmPassword2 ? <FaEye /> : <FaEyeSlash />}
+                        </button>
+                        </div>
+
                         <div className="mb-4 text-center">
                             <label className="block text-sm font-medium text-white font-poppins">Status</label>
                             <div className="flex justify-center">
@@ -212,21 +271,24 @@ const Register = () => {
                                     type="radio"
                                     id="binusian"
                                     name="status"
-                                    checked={isBinusian}
-                                    onChange={() => setIsBinusian(true)}
+                                    checked={formData.isBinusian}
+                                    onChange={handleToggle}
+                                    value="binusian"
                                 />
                                 <label htmlFor="binusian" className="ml-2 text-white">Binusian</label>
                                 <input
                                     type="radio"
                                     id="nonBinusian"
                                     name="status"
-                                    checked={!isBinusian}
-                                    onChange={() => setIsBinusian(false)}
+                                    checked={!formData.isBinusian}
+                                    onChange={handleToggle}
                                     className="ml-4"
+                                    value="nonBinusian"
                                 />
                                 <label htmlFor="nonBinusian" className="ml-2 text-white">Non-Binusian</label>
                             </div>
                         </div>
+                        {error && <p className="text-red-500 text-center">{error}</p>}
                         <button type="submit" className="bg-gradient-to-b from-indigo-950 via-indigo-750 to-indigo-600 text-white rounded p-2 mt-4 w-full">Sign Up</button>
                         <p className="mt-4 text-center text-white">
                             Already have an account? <Link to="/Login" className="text-white hover:underline text-glow">Sign In</Link>

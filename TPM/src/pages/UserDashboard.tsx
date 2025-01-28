@@ -1,4 +1,3 @@
-import logoutIcon from "../assets/logout.png";
 import { FaRegUserCircle } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
 import { MdOutlineEmail } from "react-icons/md";
@@ -13,6 +12,9 @@ import awan from "../assets/Cloud 2 Home.png"
 import { motion } from "motion/react"
 import { FaWhatsapp } from "react-icons/fa";
 import starBg from "../assets/Star Background.png"
+import { useNavigate } from "react-router-dom";
+import axios from '../config/instance'
+import Logout from "@/components/Logout";
 
 const userData = [
   {
@@ -30,6 +32,8 @@ const userData = [
 ];
 
 export default function UserDashboard() {
+  const navigate = useNavigate();
+
     const teamMembers = [
         { name: "Nathasa Bintang Kayesa" },
         { name: "Ayatullah Bintang Qurne" }, 
@@ -37,7 +41,7 @@ export default function UserDashboard() {
       ];
 
   return (
-    <div className="bg-[#17116B] h-[785.5px] pointer-events-none">
+    <div className="bg-[#17116B] h-[785.5px]">
         <motion.img
                 src={starBg}
                 className="absolute w-full" 
@@ -45,10 +49,7 @@ export default function UserDashboard() {
             />
       <div className="flex justify-between pl-[80px] pr-[30px] pt-[55px]">
         <h1 className="text-5xl text-center mb-8 text-glow">Welcome, Tech Titans</h1>
-        <div className="w-[140px] h-[45px] border border-1 rounded-[16px] flex justify-center items-center">
-          <img src={logoutIcon} alt="logout" />
-          <p className="text-[19px] font-medium">Logout</p>
-        </div>
+        <Logout/>
       </div>
 
       <div className="flex justify-between">

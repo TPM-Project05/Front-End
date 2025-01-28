@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouteObject } from "react-router-dom";
+import { createBrowserRouter, redirect, RouteObject } from "react-router-dom";
 import Home from "./pages/Home";
 import HomeSementara from "./pages/HomeSementara";
 import Example from "./pages/Example";
@@ -9,6 +9,16 @@ import EditMember from "./pages/EditMember";
 import TeamList from "./pages/TeamList";
 import Login from "./pages/Login";
 import Register from "./pages/register";
+import InputTeam from "./pages/InputTeam";
+
+const token = localStorage.getItem("access_token")
+
+const authHome = () => {
+  if (!token) {
+      return redirect("/login")
+  }
+  return null
+}
 
 const routes: RouteObject[] = [
     {
@@ -29,7 +39,8 @@ const routes: RouteObject[] = [
     },
     {
       path: '/dashboard',
-      element: <UserDashboard/>
+      element: <UserDashboard/>,
+      loader: authHome
     },
     {
       path: '/edit',
@@ -40,11 +51,11 @@ const routes: RouteObject[] = [
       element: <TeamList/>
     },
     {
-      path: '/Login', 
+      path: '/login', 
       element: <Login /> 
     },
     {
-      path: '/Register',
+      path: '/register',
       element: <Register />
     },
     {
