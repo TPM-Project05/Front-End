@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState, ReactNode, useRef, createContext } from "react";
-import { FaChevronDown } from "react-icons/fa6";
+import { FaChevronRight, FaChevronUp } from 'react-icons/fa';
 
 // Menentukan tipe untuk context
 interface AccordionContextType {
@@ -71,10 +71,11 @@ export function AccordionItem({ children, value, trigger, ...props }: AccordionI
           className="flex justify-between items-center py-4 font-medium text-2xl text-white hover:text-glow transition-all"
         >
           {trigger}
-          <FaChevronDown
-            size={16}
-            className={`text-white transition-transform ${open ? "rotate-180" : ""}`}
-          />
+          {open ? (
+            <FaChevronUp size={16} className="text-white transition-transform rotate-180" />
+          ) : (
+            <FaChevronRight size={16} className="text-white" />
+          )}
         </header>
       </li>
       <div

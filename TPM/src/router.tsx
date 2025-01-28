@@ -37,16 +37,20 @@ const routes: RouteObject[] = [
     },
     {
       path: '/teamList',
-      element: <TeamList/>,
+      element: <TeamList/>
     },
     {
       path: '/Login', 
-      element: <Login />, 
+      element: <Login /> 
     },
     {
       path: '/Register',
-      element: <Register />,
+      element: <Register />
     },
+    {
+      path: '/inputteam',
+      element: <InputTeam />
+    }
 ];
   
 const router = createBrowserRouter(routes);
