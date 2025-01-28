@@ -53,7 +53,7 @@ const Login = () => {
       }
 
       const token = response.data?.token;
-      localStorage.setItem('access_token', JSON.stringify(token));
+      localStorage.setItem('access_token', token);
     } catch (error) {
       console.error('Login failed:', error);
       setFormData(prevState => ({
