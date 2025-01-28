@@ -8,8 +8,7 @@ import UserDashboard from "./pages/UserDashboard";
 import EditMember from "./pages/EditMember";
 import TeamList from "./pages/TeamList";
 import Login from "./pages/Login";
-import Register from "./pages/Register";
-import InputTeam from "./pages/InputTeam";
+import Register from "./pages/register";
 
 const routes: RouteObject[] = [
     {
@@ -38,8 +37,9 @@ const routes: RouteObject[] = [
     },
     {
       path: '/teamList',
-      element: <TeamList/>.
+      element: <TeamList/>,
     },
+    {
       path: '/Login', 
       element: <Login />, 
     },
@@ -47,10 +47,6 @@ const routes: RouteObject[] = [
       path: '/Register',
       element: <Register />,
     },
-    {
-      path: '/inputteam',
-      element: <InputTeam />,
-    }
 ];
   
 const router = createBrowserRouter(routes);

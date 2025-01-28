@@ -1,16 +1,11 @@
 import image from "../assets/nathasa.jpg"
-import starBg from "../assets/Star Background.png";
 import { motion } from "framer-motion";
 
 
 export default function Mentors() {
     return (
         <div className="bg-[#1C0C5B]">
-            <motion.img
-                src={starBg}
-                className="absolute w-full" 
-                alt="Moon"
-            />
+            
             <div className="font-poppins leading-tight flex justify-center">
                 <div className="text-[56px] text-glow text-white font-poppins">Meet Our Mentors</div>
             </div>

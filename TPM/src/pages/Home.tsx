@@ -4,7 +4,7 @@ import '../components/PageStyles.css';
 import Navbar from './Navbar';
 import Timeline from './Timeline';
 import Sponsor from './Sponsor';
-import ContactUs from '@/components/ContactUs';
+import ContactUs from '../components/ContactUs';  // Ensure correct import path
 import Footer from "../components/Footer";
 import ImageSlider from '@/components/ImageSlider';
 import Faqs from "./Faqs";
@@ -14,43 +14,28 @@ import Price from "./Prize";
 import About from "./About";
 import HalamanAwal from "./HalamanAwal";
 
-export default function NewHome() {
-    return (
-        <div className="bg-[#050046]">
-            <Navbar/>
-            <div id="halamanAwal"><HalamanAwal/></div>
-            <div id="about"><About/></div>
-            <div id="prize"><Price/></div>
-            <div id="catatan"><Catatan/></div>
-            <div id="imageslider"><ImageSlider/></div>
-            <div id="jury"><Jury/></div>
-            <div id="timeline"><Timeline/></div>
-            <div id="faqs"><Faqs/></div>
-            <div id="sponsor"><Sponsor/></div>
-            <div id="contactUs"><ContactUs/></div>
-            <Footer/>
-        </div>
-
-import Media from './Media'; 
-import ContactUs from './ContactUs';
-
-export default function NewHome() {
+export default function Home() {
     return (
         <> 
             <header>
                 <Navbar />
             </header>
             <section id="home">
-                <Page />
+                <HalamanAwal />
             </section>
             <section id="about">
                 <About />
             </section>
             <section id="prizes">
-                <Prize />
+                <Price />
             </section>
-            <section id="mentors">
-                <Mentor />
+            <section id="catatan">
+                <Catatan />
+            </section>
+            <section id="imageslider">
+                <ImageSlider />
+            </section>
+            <section id="jury">
                 <Jury />
             </section>
             <section id="timeline">
@@ -62,12 +47,10 @@ export default function NewHome() {
             <section id="sponsor">
                 <Sponsor />
             </section>
-            <section id="media">
-                <Media />
-            </section>
             <section id="contact">
                 <ContactUs />
-            </section>           
+            </section>
+            <Footer />
         </>
     );
 }
