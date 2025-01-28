@@ -4,7 +4,7 @@ import '../components/PageStyles.css';
 import Navbar from './Navbar';
 import Timeline from './Timeline';
 import Sponsor from './Sponsor';
-import ContactUs from '@/components/ContactUs';
+import ContactUs from '../components/ContactUs';  // Ensure correct import path
 import Footer from "../components/Footer";
 import ImageSlider from '@/components/ImageSlider';
 import Faq from "./Faq";
@@ -14,6 +14,7 @@ import Price from "./Prize";
 import About from "./About";
 import HalamanAwal from "./HalamanAwal";
 import MediaPartner from "./MediaPartner";
+
 
 export default function NewHome() {
     return (

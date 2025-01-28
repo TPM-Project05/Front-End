@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import { BsArrowLeftCircle } from "react-icons/bs";
@@ -11,9 +11,11 @@ import { FaUser, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Register = () => {
     const navigate = useNavigate();
-    const [teamName, setTeamName] = useState('');
+    const [name, setName] = useState('');  
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+
     const [isBinusian, setIsBinusian] = useState(true);
     const [showPassword, setShowPassword] = useState(false);
     const [showconfirmPassword, setShowconfirmPassword] = useState(false);
@@ -127,6 +129,7 @@ const Register = () => {
                 <div className="ml-[43px] border-2 w-[120px] h-[40px] z-20 rounded-[16px] justify-center items-center
                     hover:border-[#ffff] hover:scale-105 hover:shadow-md hover:shadow-[#ffff]/50 
                     active:border-[#ffff] active:scale-100 active:shadow-xl active:shadow-[#ffff]">
+
                 <div className="flex justify-normal p-[7px] gap-5 items-center">
                     <BsArrowLeftCircle size={24} />
                     <p className="text-white">back</p>
