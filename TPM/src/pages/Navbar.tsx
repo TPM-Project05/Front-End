@@ -67,6 +67,13 @@ const Navbar = () => {
                         </Link>
                         <Link 
                             to="/" 
+                            onClick={() => scrollToSection('sponsor')}
+                            className="text-sm font-medium mx-6 hover:text-white hover:underline hover:underline-offset-4 hover:glow transition-all duration-200"
+                        >
+                            Sponsor
+                        </Link>
+                        <Link 
+                            to="/" 
                             onClick={() => scrollToSection('contactUs')}
                             className="text-sm font-medium mx-6 hover:text-white hover:underline hover:underline-offset-4 hover:glow transition-all duration-200"
                         >

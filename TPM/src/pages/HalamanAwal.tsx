@@ -3,9 +3,10 @@ import moon from "../assets/Moon.png";
 import star from "../assets/Star.png";
 import starBg from "../assets/Star Background.png";
 import cloud from "../assets/Cloud Hero Section.png";
+import { useNavigate } from 'react-router-dom';
 
-
-export default function HalamanAwal() {
+const HalamanAwal = () => {
+    const navigate = useNavigate();
     return (
         <div className="bg-[#050046] h-[740px] w-full">
             <motion.img
@@ -67,7 +68,9 @@ export default function HalamanAwal() {
                     <p className="text-center text-xl pb-5 pt-2">
                         Empowering Change Through Innovation
                     </p>
-                    <button className="h-[50px] w-[230px] border b-1 bg-[#3D2C8D] rounded-[8px] shadow-xl 
+                    <button 
+                        onClick={() => navigate('/Login')} 
+                        className="h-[50px] w-[230px] border b-1 bg-[#3D2C8D] rounded-[8px] shadow-xl 
                     hover:bg-[#050046] hover:shadow-2xl transition-all duration-300">
                         <p className="text-center">
                             Register Here
@@ -77,4 +80,5 @@ export default function HalamanAwal() {
             </div>
         </div>
     );
-}
+};
+export default HalamanAwal;
