@@ -8,89 +8,97 @@ import { HiCalendarDateRange } from "react-icons/hi2";
 import { IoDocumentTextOutline } from "react-icons/io5";
 import { FaCircle } from "react-icons/fa";
 import { FaRegEdit } from "react-icons/fa";
-import awan from "../assets/Cloud 2 Home.png"
-import { motion } from "motion/react"
+import awan from "../assets/Cloud 2 Home.png";
+import { motion } from "motion/react";
 import { FaWhatsapp } from "react-icons/fa";
-import starBg from "../assets/Star Background.png"
+import starBg from "../assets/Star Background.png";
 import { useNavigate } from "react-router-dom";
-import axios from '../config/instance'
+import axios from '../config/instance';
 import Logout from "@/components/Logout";
-
-const userData = [
-  {
-    fullName: "Anabelle Gabriella Imandjaja",
-    email: "anabelle@example.com",
-    phone: "+62 812 3456 7890",
-    lineId: "@anabelle123",
-    githubId: "AnabelleGitHub",
-    birthPlace: "Jakarta",
-    birthDate: "1997-05-15",
-    cv: "https://link-to-cv.com",
-    idCard: "https://link-to-id-card.com",
-  },
-  // Data lain bisa ditambahkan di sini
-];
+import { ApiError, TeamDetails } from "@/interfaces/Types";
+import { AxiosError, AxiosResponse } from "axios";
+import React from "react";
 
 export default function UserDashboard() {
   const navigate = useNavigate();
 
-    const teamMembers = [
-        { name: "Nathasa Bintang Kayesa" },
-        { name: "Ayatullah Bintang Qurne" }, 
-        null, // Data member ke-3 tidak ada
-      ];
+  // Fetch team details from the API
+  const fetchTeam = async (): Promise<TeamDetails> => {
+    try {
+      const response: AxiosResponse<TeamDetails> = await axios.get('/dashboard', {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${(localStorage.getItem("access_token"))}`,
+        },
+      });
+      console.log(response, 'response');
+      
+      return response.data;
+    } catch (error) {
+      if (error) {
+        const axiosError = error as AxiosError<ApiError>;
+        throw new Error(axiosError.response?.data.message || 'Unknown error');
+      }
+      throw new Error('Error fetching users');
+    }
+  };
+
+  // Get team data
+  const [teamDetails, setTeamDetails] = React.useState<TeamDetails | null>(null);
+  console.log(teamDetails, '<<<<<');
+  
+
+  React.useEffect(() => {
+    fetchTeam().then((data) => setTeamDetails(data)).catch((error) => console.error(error));
+  }, []);
 
   return (
     <div className="bg-[#17116B] h-[785.5px]">
-        <motion.img
-                src={starBg}
-                className="absolute w-full" 
-                alt="Moon"
-            />
+      <motion.img
+        src={starBg}
+        className="absolute w-full"
+        alt="Moon"
+      />
       <div className="flex justify-between pl-[80px] pr-[30px] pt-[55px]">
-        <h1 className="text-5xl text-center mb-8 text-glow">Welcome, Tech Titans</h1>
-        <Logout/>
+        <h1 className="text-5xl text-center mb-8 text-glow">Welcome {teamDetails?.team?.name}</h1>
+        <Logout />
       </div>
 
       <div className="flex justify-between">
-      <div className="h-[450px] w-[590px] border border-1 bg-white bg-opacity-20 ml-[82px] rounded-[16px]">
-        <div className="pt-[30px] pl-[32px] pr-[30px]">
-          <p className="text-white font-medium text-2xl font-poppins">
-            Team Leader Information
-          </p>
-          {/* Menampilkan data menggunakan map */}
-          {userData.map((user, index) => (
-            <div key={index} className="pt-5">
+        <div className="h-[450px] w-[590px] border border-1 bg-white bg-opacity-20 ml-[82px] rounded-[16px]">
+          <div className="pt-[30px] pl-[32px] pr-[30px]">
+            <p className="text-white font-medium text-2xl font-poppins">Team Leader Information</p>
+            <div className="pt-5">
               <div className="flex justify-between pt-2">
                 <div className="flex justify-normal items-center gap-2">
                   <FaRegUserCircle size={24} />
                   <p className="font-poppins">Full Name</p>
                 </div>
-                <p className="font-poppins">{user.fullName}</p>
+                <p className="font-poppins">{teamDetails?.leader?.full_name}</p>
               </div>
 
               <div className="flex justify-between pt-2">
                 <div className="flex justify-normal items-center gap-2">
-                    <MdOutlineEmail size={24}/>
+                  <MdOutlineEmail size={24} />
                   <p className="font-poppins">Email</p>
                 </div>
-                <p className="font-poppins">{user.email}</p>
+                <p className="font-poppins">{teamDetails?.team?.email}</p>
               </div>
 
               <div className="flex justify-between pt-2">
                 <div className="flex justify-normal items-center gap-2">
-                  <FiPhone size={24}/>
+                  <FiPhone size={24} />
                   <p className="font-poppins">Phone</p>
                 </div>
-                <p className="font-poppins">{user.phone}</p>
+                <p className="font-poppins">{teamDetails?.leader?.phone}</p>
               </div>
 
               <div className="flex justify-between pt-2">
                 <div className="flex justify-normal items-center gap-2">
-                  <IoAtOutline size={24}/>
+                  <IoAtOutline size={24} />
                   <p className="font-poppins">Line ID</p>
                 </div>
-                <p className="font-poppins">{user.lineId}</p>
+                <p className="font-poppins">{teamDetails?.leader.line_id}</p>
               </div>
 
               <div className="flex justify-between pt-2">
@@ -98,51 +106,50 @@ export default function UserDashboard() {
                   <FaGithub size={24} />
                   <p className="font-poppins">GitHub ID</p>
                 </div>
-                <p className="font-poppins">{user.githubId}</p>
+                <p className="font-poppins">{teamDetails?.leader.github_id}</p>
               </div>
 
               <div className="flex justify-between pt-2">
                 <div className="flex justify-normal items-center gap-2">
-                  <CiLocationOn size={24}/>
+                  <CiLocationOn size={24} />
                   <p className="font-poppins">Birth Place</p>
                 </div>
-                <p className="font-poppins">{user.birthPlace}</p>
+                <p className="font-poppins">{teamDetails?.leader.birth_place}</p>
               </div>
 
               <div className="flex justify-between pt-2">
                 <div className="flex justify-normal items-center gap-2">
-                <HiCalendarDateRange size={24}/>
+                  <HiCalendarDateRange size={24} />
                   <p className="font-poppins">Birth Date</p>
                 </div>
-                <p className="font-poppins">{user.birthDate}</p>
+                <p className="font-poppins">{teamDetails?.leader.birth_date}</p>
               </div>
 
               <div className="flex justify-between pt-2">
                 <div className="flex justify-normal items-center gap-2">
-                  <IoDocumentTextOutline size={24}/>
+                  <IoDocumentTextOutline size={24} />
                   <p className="font-poppins">CV</p>
                 </div>
-                <a href={user.cv} target="_blank" className="font-poppins text-blue-500">
+                <a href={teamDetails?.leader.cv} target="_blank" className="font-poppins text-blue-500">
                   View CV
                 </a>
               </div>
 
               <div className="flex justify-between pt-2">
                 <div className="flex justify-normal items-center gap-2">
-                  <IoDocumentTextOutline size={24}/>
+                  <IoDocumentTextOutline size={24} />
                   <p className="font-poppins">ID/Binusian Card</p>
                 </div>
-                <a href={user.idCard} target="_blank" className="font-poppins text-blue-500">
+                <a href={teamDetails?.leader.flazz_card} target="_blank" className="font-poppins text-blue-500">
                   View ID
                 </a>
               </div>
             </div>
-          ))}
+          </div>
         </div>
-      </div>
-      <div className="flex flex-col gap-3">
-        {/* Timeline */}
-      <div className="w-[505px] h-[310px] border border-1 bg-white bg-opacity-20 mr-[30px] rounded-[16px]">
+
+        <div className="flex flex-col gap-3">
+        <div className="w-[505px] h-[310px] border border-1 bg-white bg-opacity-20 mr-[30px] rounded-[16px]">
           <div className="pt-[30px] pl-[32px]">
             <p className="text-white font-medium text-2xl font-poppins">Timeline</p>
                 <div className="w-80 pt-5">
@@ -192,44 +199,45 @@ export default function UserDashboard() {
           </div>
         </div>
 
-      {/* Team Members (dipindahkan ke bawah Timeline) */}
-      <div className="w-[505px] h-[140px] border border-1 bg-white bg-opacity-20 rounded-[16px]">
-      <div className="p-[20px]">
-        <div className="flex justify-between">
-          <p className="text-white font-medium text-2xl font-poppins">Team Members</p>
-          <button className="pointer-events-auto">
-            <FaRegEdit size={24} />
-          </button>
+          <div className="w-[505px] h-[140px] border border-1 bg-white bg-opacity-20 rounded-[16px]">
+            <div className="p-[20px]">
+              <div className="flex justify-between">
+                <p className="text-white font-medium text-2xl font-poppins">Team Members</p>
+                <button className="pointer-events-auto">
+                  <FaRegEdit size={24} />
+                </button>
+              </div>
+
+              {/* Menampilkan data member */}
+              {teamDetails?.members.map((member, index) => (
+                <div key={index} className="flex justify-between">
+                  <p>{`Member ${index + 1}`}</p>
+                  <p>{member ? member.full_name : "-"}</p> {/* Menampilkan nama atau "-" jika null */}
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
 
-        {/* Menampilkan data member */}
-        {teamMembers.map((member, index) => (
-          <div key={index} className="flex justify-between">
-            <p>{`Member ${index + 1}`}</p>
-            <p>{member ? member.name : "-"}</p> {/* Menampilkan nama atau "-" jika null */}
-          </div>
-        ))}
+        <motion.img
+          src={awan}
+          className="absolute mt-[380px] z-[10] pointer-events-none w-full mr-6 h-[270px] 2xl:w-full"
+          alt="Cloud"
+        />
       </div>
-      </div>
-      </div>
-      <motion.img
-                src={awan}
-                    className="absolute mt-[380px] z-[10] pointer-events-none w-full mr-6 h-[270px] 2xl:w-full" 
-                alt="Cloud"
-            />
-      </div>
+
       <div className="flex flex-col absolute z-20 ml-[80px] pointer-events-auto">
-        <div className=" flex justify-normal gap-3  mt-[40px]">
-            <FaWhatsapp size={24} className=""/>
-            <p className="text-[20px] font-medium"> Contact Us</p>
+        <div className=" flex justify-normal gap-3 mt-[40px]">
+          <FaWhatsapp size={24} />
+          <p className="text-[20px] font-medium"> Contact Us</p>
         </div>
         <div className="flex justify-between ml-[37px] gap-5 mt-2">
-            <p>Eldwin</p>
-            <p>+6287609897898</p>
+          <p>Eldwin</p>
+          <p>+6287609897898</p>
         </div>
         <div className="flex justify-between ml-[37px] gap-5">
-            <p>Sianto</p>
-            <p>+6287609897898</p>
+          <p>Sianto</p>
+          <p>+6287609897898</p>
         </div>
       </div>
     </div>
