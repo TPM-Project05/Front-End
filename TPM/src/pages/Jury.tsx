@@ -30,7 +30,7 @@ const Jury = () => {
   return (
     
     <div className="bg-[#17116B] z-[-10] overflow-hidden">
-      <motion.img
+            <motion.img
                 src={starBg}
                 className="absolute w-full" 
                 alt="Moon"
@@ -46,48 +46,48 @@ const Jury = () => {
                 transform -scale-x-100" 
                 alt="Mirror Aurora Left"
             />
-    <motion.div
-      initial={{ opacity: 0.0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.3, duration: 0.8, ease: "easeInOut" }}
-      className="items-center justify-center h-[500px] z-[-20]"
-      >
-      <div className="font-poppins leading-tight flex justify-center">
-        <div className="text-[56px] text-glow text-white font-poppins">Meet Our Jury</div>
-      </div>
-      <div className="relative flex justify-center top-[14%]">
-        {data.map((item, index) => {
-          const position = positions[index % data.length];
-          return (
             <motion.div
-            key={index}
-            className="h-[310px] w-[210px] rounded-[15px] shadow-lg p-4 bg-[#3D2C8D]"
-            initial="center"
-            animate={position}
-              variants={imageVariants}
-              whileHover={hoverVariants} // Apply hover effects
-              transition={{ duration: 0.5 }}
-              style={{ position: 'absolute' }}
+              initial={{ opacity: 0.0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.8, ease: "easeInOut" }}
+              className="items-center justify-center h-[500px] z-[-20]"
             >
-              <div className="flex justify-center">
-                <div className="rounded-[30px] bg-gradient-to-b from-[#000000] to-[#9747FF] shadow-gray-900 shadow-md">
-                  <motion.img
-                    src={item.image}
-                    alt={`image-${index}`}
-                    className="h-[205px] w-[160px] rounded-[30px] m-2"
-                    />
+              <div className="font-poppins leading-tight flex justify-center">
+                <div className="text-[56px] text-glow text-white font-poppins">Meet Our Jury</div>
+              </div>
+              <div className="relative flex justify-center top-[14%]">
+              {data.map((item, index) => {
+                const position = positions[index % data.length];
+                return (
+                  <motion.div
+                  key={index}
+                  className="h-[310px] w-[210px] rounded-[15px] shadow-lg p-4 bg-[#3D2C8D]"
+                  initial="center"
+                  animate={position}
+                    variants={imageVariants}
+                    whileHover={hoverVariants} // Apply hover effects
+                    transition={{ duration: 0.5 }}
+                    style={{ position: 'absolute' }}
+                  >
+                    <div className="flex justify-center">
+                      <div className="rounded-[30px] bg-gradient-to-b from-[#000000] to-[#9747FF] shadow-gray-900 shadow-md">
+                        <motion.img
+                          src={item.image}
+                          alt={`image-${index}`}
+                          className="h-[205px] w-[160px] rounded-[30px] m-2"
+                          />
+                      </div>
+                    </div>
+                    <div className="text-center text-white mt-2">
+                      <p className="font-bold">{item.name}</p>
+                      <p className="text-sm">{item.position}</p>
+                    </div>
+                    </motion.div>
+                        );
+                      })}
                 </div>
-              </div>
-              <div className="text-center text-white mt-2">
-                <p className="font-bold">{item.name}</p>
-                <p className="text-sm">{item.position}</p>
-              </div>
             </motion.div>
-          );
-        })}
-      </div>
-    </motion.div>
-          </div>
+        </div>
   );
 };
 

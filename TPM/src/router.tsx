@@ -9,7 +9,6 @@ import EditMember from "./pages/EditMember";
 import TeamList from "./pages/TeamList";
 import Login from "./pages/Login";
 import Register from "./pages/register";
-import InputTeam from "./pages/InputTeam";
 
 const token = localStorage.getItem("access_token")
 
@@ -58,10 +57,6 @@ const routes: RouteObject[] = [
       path: '/register',
       element: <Register />
     },
-    {
-      path: '/inputteam',
-      element: <InputTeam />
-    }
 ];
   
 const router = createBrowserRouter(routes);

@@ -55,7 +55,7 @@ const ImageSlider = () => {
   };
 
   return (
-    <div className="bg-gradient-to-b from-[#17116B] to-[#050046]">
+    <div className="bg-gradient-to-b from-[#17116B] to-[#050046] overflow-hidden">
       <motion.img
                 src={starBg}
                 className="absolute w-full" 

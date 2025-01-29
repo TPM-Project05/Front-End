@@ -72,7 +72,7 @@ const Login = () => {
       />
       <motion.img
         src={awan}
-        className="absolute bottom-0 w-full h-[287px] pointer-events-none z-20" 
+        className="absolute bottom-0 w-full h-[287px] pointer-events-none z-0" 
         alt="Awan"
       />
       <motion.img

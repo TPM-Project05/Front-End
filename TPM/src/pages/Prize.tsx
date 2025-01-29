@@ -1,14 +1,20 @@
 import awan from "../assets/awan price.png"
 import { motion } from "motion/react"
 import starBg from "../assets/Star Background.png"
+import star from "../assets/Star.png"
 import { FaStar } from "react-icons/fa";
 
 export default function Price() {
     return (
-        <div className="bg-[#17116B] h-[850px]">
+        <div className="bg-[#17116B] h-[950px] overflow-hidden">
             <motion.img
                 src={starBg}
                 className="absolute z-10 w-full pointer-events-none" 
+                alt="Moon"
+            />
+            <motion.img
+                src={awan}
+                    className="absolute mt-[675px] z-[10] pointer-events-none w-full" 
                 alt="Moon"
             />
             {/* Star Prize 1 */}
@@ -35,29 +41,29 @@ export default function Price() {
             </div>
 
             {/* Star Prize 2 */}
-            <div className="flex justify-normal">
+            <div className="flex justify-center">
             <motion.div
-                className="absolute z-10 w-[40px] h-[33px] pointer-events-none mt-[260px] ml-[230px] -rotate-[14deg]"
+                className="absolute z-10 w-[36px] h-[33px] pointer-events-none mt-[265px] ml-[-850px] -rotate-[14deg]"
             >
                 <FaStar className="w-full h-full" />
             </motion.div>
             </div>
-            <div className="flex justify-normal">
+            <div className="flex justify-center">
             <motion.div
-                className="absolute z-10 w-[40px] h-[33px] pointer-events-none mt-[269px] ml-[190px] -rotate-[14deg]"
+                className="absolute z-10 w-[36px] h-[33px] pointer-events-none mt-[256px] ml-[-780px] -rotate-[14deg]"
             >
                 <FaStar className="w-full h-full" />
             </motion.div>
             </div>
 
-{/* Star Prize 2 */}
-<div className="flex justify-center">
-    <motion.div
-        className="absolute z-10 w-[36px] h-[33px] pointer-events-none mt-[310px] ml-[739px] rotate-[14deg]"
-    >
-        <FaStar className="w-full h-full" />
-    </motion.div>
-</div>
+            {/* Star Prize 3 */}
+            <div className="flex justify-center">
+                <motion.div
+                    className="absolute z-10 w-[36px] h-[33px] pointer-events-none mt-[310px] ml-[739px] rotate-[14deg]"
+                >
+                    <FaStar className="w-full h-full" />
+                </motion.div>
+            </div>
 
         <div className="font-poppins leading-tight flex justify-center">
                 <div className="text-[20px] text-white font-poppins">Total prize of</div>
@@ -76,14 +82,14 @@ export default function Price() {
                             </svg>
                         </header>
                             <p className="text-white font-bold text-[30px] pb-2">
-                                1st Place
+                                2nd Place
                             </p>
                         </div>
                         <div className="flex items-center mx-5 justify-normal flex-1 text-white gap-4 mb-2">
                             <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
                                 <path d="M20 26.6667C19.0833 26.6667 18.2989 26.3406 17.6467 25.6883C16.9944 25.0361 16.6678 24.2511 16.6667 23.3333C16.6656 22.4156 16.9922 21.6311 17.6467 20.98C18.3011 20.3289 19.0856 20.0022 20 20C20.9144 19.9978 21.6994 20.3244 22.355 20.98C23.0106 21.6356 23.3367 22.42 23.3333 23.3333C23.33 24.2467 23.0039 25.0317 22.355 25.6883C21.7061 26.345 20.9211 26.6711 20 26.6667ZM12.2917 11.6667H27.7083L31.0417 5H8.95833L12.2917 11.6667ZM14 35H26C28.5 35 30.625 34.1322 32.375 32.3967C34.125 30.6611 35 28.5289 35 26C35 24.9444 34.8194 23.9167 34.4583 22.9167C34.0972 21.9167 33.5833 21.0139 32.9167 20.2083L28.5833 15H11.4167L7.08333 20.2083C6.41667 21.0139 5.90278 21.9167 5.54167 22.9167C5.18056 23.9167 5 24.9444 5 26C5 28.5278 5.86833 30.66 7.605 32.3967C9.34167 34.1333 11.4733 35.0011 14 35Z" fill="white"/>
                                 </svg>
-                                <p className="text-[25px]">Rp8.500.000</p>
+                                <p className="text-[25px]">Rp4.500.000</p>
                         </div>
                         <div className="flex items-center mx-5 justify-normal flex-1 text-white gap-4 mb-2">
                             <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
@@ -144,14 +150,14 @@ export default function Price() {
                             </svg>
                         </header>
                             <p className="text-white font-bold text-[30px] pb-2">
-                                1st Place
+                                3rd Place
                             </p>
                         </div>
                         <div className="flex items-center mx-5 justify-normal flex-1 text-white gap-4 mb-2">
                             <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
                                 <path d="M20 26.6667C19.0833 26.6667 18.2989 26.3406 17.6467 25.6883C16.9944 25.0361 16.6678 24.2511 16.6667 23.3333C16.6656 22.4156 16.9922 21.6311 17.6467 20.98C18.3011 20.3289 19.0856 20.0022 20 20C20.9144 19.9978 21.6994 20.3244 22.355 20.98C23.0106 21.6356 23.3367 22.42 23.3333 23.3333C23.33 24.2467 23.0039 25.0317 22.355 25.6883C21.7061 26.345 20.9211 26.6711 20 26.6667ZM12.2917 11.6667H27.7083L31.0417 5H8.95833L12.2917 11.6667ZM14 35H26C28.5 35 30.625 34.1322 32.375 32.3967C34.125 30.6611 35 28.5289 35 26C35 24.9444 34.8194 23.9167 34.4583 22.9167C34.0972 21.9167 33.5833 21.0139 32.9167 20.2083L28.5833 15H11.4167L7.08333 20.2083C6.41667 21.0139 5.90278 21.9167 5.54167 22.9167C5.18056 23.9167 5 24.9444 5 26C5 28.5278 5.86833 30.66 7.605 32.3967C9.34167 34.1333 11.4733 35.0011 14 35Z" fill="white"/>
                                 </svg>
-                                <p className="text-[25px]">Rp8.500.000</p>
+                                <p className="text-[25px]">Rp2.000.000</p>
                         </div>
                         <div className="flex items-center mx-5 justify-normal flex-1 text-white gap-4 mb-2">
                             <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
@@ -167,11 +173,6 @@ export default function Price() {
                         </div>
                 </div>
             </div>
-            <motion.img
-                src={awan}
-                    className="absolute mt-[675px] z-[10] pointer-events-none w-full" 
-                alt="Moon"
-            />
             </div>
         </div>
     );
