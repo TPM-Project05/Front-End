@@ -3,6 +3,8 @@
 @tailwind utilities;
 body {
   font-family: 'Poppins', sans-serif;
+  box-sizing: border-box;
+  color: white;
 }
 
 .glow:hover {
@@ -21,10 +23,4 @@ body {
   .clip-team {
     clip-path: polygon(20% 0, 140% 0, 80% 100%, -50% 100%);
   }
-  
-  body {
-    font-family: 'Poppins';
-    color: white;
-  }
-
 }
