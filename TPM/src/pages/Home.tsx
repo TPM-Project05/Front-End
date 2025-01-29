@@ -1,8 +1,4 @@
-import '../index.css';
-import '../components/HeroAnimations.css';
-import '../components/PageStyles.css';
 import Navbar from './Navbar';
-import Timeline from './Timeline';
 import Sponsor from './Sponsor';
 import ContactUs from '../components/ContactUs';  // Ensure correct import path
 import Footer from "../components/Footer";
@@ -16,7 +12,7 @@ import HalamanAwal from "./HalamanAwal";
 import MediaPartner from "./MediaPartner";
 
 
-export default function NewHome() {
+export default function Home() {
     return (
         <div className="bg-[#050046]">
             <Navbar/>

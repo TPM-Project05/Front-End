@@ -7,8 +7,8 @@ import Moon from "../assets/Moon ContactUs.png";
 export default function ContactUs() {
   return (
     
-    <div className="bg-[#17116B] h-[750px]">
-      <motion.img
+    <div className="bg-[#17116B] h-[750px] overflow-hidden">
+            <motion.img
                 src={starBg}
                 className="absolute opacity-90 z-10 w-full" 
                 alt="Moon"

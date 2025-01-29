@@ -2,7 +2,7 @@ import Accordion, { AccordionItem } from "@/components/Accordion";
 
 export default function faq() {
     return (
-        <div className="bg-gradient-to-b from-[#050046] to-[#17116B]">
+        <div className="bg-gradient-to-b from-[#050046] to-[#17116B] overflow-hidden">
         <div className="flex flex-col items-center justify-center py-10">
             {/* Heading utama untuk halaman FAQ */}
             <div className="font-poppins leading-tight flex justify-center">
