@@ -4,6 +4,7 @@
 
 body {
   font-family: 'Poppins', sans-serif;
+  color: white;
 }
 
 .glow:hover {
@@ -20,14 +21,14 @@ body {
     text-shadow: 0 0 0px #fff, 0 0 0px #fff, 0 0 8px #fff, 0 0 0px #fff, 0 0 0px #fff;
   }
 
-  body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    box-sizing: border-box;
-    background-color: blueviolet;
-    color: white;
+  .clip-team {
+    clip-path: polygon(20% 0, 140% 0, 80% 100%, -50% 100%);
   }
+
+  .clip-team-data {
+    clip-path: polygon(10% 0, 175% 0, 90% 100%, -50% 100%);
+  }
+
   .content {
     width: 100%;
     max-width: 100%;

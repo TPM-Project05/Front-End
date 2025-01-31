@@ -12,6 +12,10 @@
   "dependencies": {
     "@headlessui/react": "^2.2.0",
     "@heroicons/react": "^2.2.0",
+    "@heroui/calendar": "^2.2.10",
+    "@heroui/react": "^2.6.14",
+    "@heroui/system": "^2.4.7",
+    "@heroui/theme": "^2.4.6",
     "@mui/icons-material": "^6.4.1",
     "@mui/material": "^6.4.1",
     "@mui/styled-engine-sc": "^6.4.0",

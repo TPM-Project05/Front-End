@@ -13,7 +13,7 @@ import MediaPartner from "./MediaPartner";
 
 export default function HomeSementara(){
     return(
-        <div className=" z-[-20]">
+        <div className="bg-[#050046] z-[-20] w-auto ">
             <HalamanAwal/>
             <About/>
             <Price/>
