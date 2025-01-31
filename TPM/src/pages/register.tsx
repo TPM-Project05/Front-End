@@ -121,7 +121,7 @@ type CreateUserResponse = {
             />
             <motion.img
                 src={star}
-                className="absolute left-[100px] top-[500px] opacity-100 w-[110px] pointer-events-none z-20" 
+                className="absolute left-[8%] top-[70%] opacity-100 w-[8%] pointer-events-none z-20" 
                 alt="Star 2"
                 animate={{ rotate: 360 }} 
                 transition={{
@@ -132,7 +132,7 @@ type CreateUserResponse = {
             />
             <motion.img
                 src={star}
-                className="absolute left-[530px] top-[220px] opacity-100 w-[120px] pointer-events-none z-0" 
+                className="absolute left-[37%] top-[40%] opacity-100 w-[6%] pointer-events-none z-0" 
                 alt="Star 3"
                 animate={{ rotate: 360 }} 
                 transition={{
@@ -141,9 +141,10 @@ type CreateUserResponse = {
                     ease: "linear", 
                 }}
             />
+            
             <motion.img
                 src={star}
-                className="absolute right-[260px] top-[5px] opacity-100 w-[120px] pointer-events-none z-0 " 
+                className="absolute right-[17%] top-[1%] opacity-100 w-[8%] pointer-events-none z-30" 
                 alt="Star 3"
                 animate={{ rotate: 360 }} 
                 transition={{
@@ -172,7 +173,7 @@ type CreateUserResponse = {
                     <div className="flex-1">
                         <h2 className="absolute left-[150px] top-[100px] text-left text-7xl font-bold mb-4 text-white text-glow font-poppins">Register <br />Your Team!</h2>
                     </div>
-                    <form onSubmit={handleSubmit} className="w-full max-w-md mx-auto mt-[-100px] p-10 border-l-2 border-t-0 
+                    <form onSubmit={handleSubmit} className="w-full max-w-md mx-auto p-10 border-l-2 border-t-0 backdrop-blur-lg 
                     border-r-2 border-b-0 rounded-xl shadow-lg bg-white bg-opacity-15 z-20"
                         style={{
                         boxShadow: '10px 0 10px rgba(255, 255, 255, 0.4), -10px 0 10px rgba(255, 255, 255, 0.4)'
@@ -195,7 +196,7 @@ type CreateUserResponse = {
                                 </div>
                         </div>
                         <div className="mb-4 w-full relative">
-                            <label htmlFor="email" className="block text-sm font-medium text-white font-poppins">Team Name</label>
+                            <label htmlFor="email" className="block text-sm font-medium text-white font-poppins">Email</label>
                             <div className="relative">
                                 <FaUser className="absolute left-3 top-5 text-gray-500" />
                                 <input
@@ -273,6 +274,7 @@ type CreateUserResponse = {
                                     name="status"
                                     checked={formData.isBinusian}
                                     onChange={handleToggle}
+                                    className="ml-4"
                                     value="binusian"
                                 />
                                 <label htmlFor="binusian" className="ml-2 text-white">Binusian</label>
@@ -280,7 +282,7 @@ type CreateUserResponse = {
                                     type="radio"
                                     id="nonBinusian"
                                     name="status"
-                                    checked={!formData.isBinusian}
+                                    checked={formData.isBinusian}
                                     onChange={handleToggle}
                                     className="ml-4"
                                     value="nonBinusian"

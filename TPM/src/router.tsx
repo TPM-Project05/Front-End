@@ -112,9 +112,10 @@ const routes: RouteObject[] = [
     path: "/add/member",
     element: <AddMember />,
   },
-  {
-    path: ""
-  }
+    {
+      path: '/register',
+      element: <Register />
+    },
 ];
 
 const router = createBrowserRouter(routes);

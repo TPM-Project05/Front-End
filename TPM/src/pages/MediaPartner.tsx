@@ -76,7 +76,7 @@ export default function MediaPartner() {
         },
       ];
     return(
-        <div className="">
+        <div className="overflow-hidden">
             <div className="bg-gradient-to-b from-[#4339B2] to-[#17116B] h-[370px] py-8">
         <div className="font-poppins leading-tight flex justify-center">
             <div className="text-[56px] text-glow text-white font-poppins">Media Partners</div>

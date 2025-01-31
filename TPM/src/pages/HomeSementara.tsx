@@ -1,6 +1,5 @@
 import ContactUs from "@/components/ContactUs";
 import Footer from "../components/Footer";
-import Mentors from "./Mentors";
 import ImageSlider from "@/components/ImageSlider";
 import Faq from "./Faq";
 import Jury from "./Jury";

@@ -45,8 +45,8 @@ export default function Footer() {
   };
 
   return (
-    <div className="bg-[#17116B]">
-      <footer aria-labelledby="footer-heading" className="h-[730px]">
+    <div className="bg-[#17116B] overflow-hidden">
+      <footer aria-labelledby="footer-heading" className="h-[640px]">
         <div className="mx-[40px]">
           <div className="mx-10 flex justify-between h-[350px]">
             <div className="flex flex-col">
