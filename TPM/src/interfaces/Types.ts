@@ -48,7 +48,39 @@ export interface TeamDetails {
   members: Member[];
 }
 
+export interface TeamsApiResponse {
+  data: {
+    id: number;
+    name: string;
+    email: string;
+    role: string;
+    status: string;
+    email_verified_at: string | null;
+    leader_id: number | null;
+    created_at: string;
+    updated_at: string;
+    leader: Leader | null;
+    members: Member[];
+  }[];
+}
+
 export interface ApiError {
   message: string;
   status: number;
+}
+
+export interface Team {
+  id: number;
+  name: string;
+  email: string;
+  role: string;
+  status: string;
+  email_verified_at: string | null;
+  leader_id: number;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface LoginResponse {
+  team: Team;
 }
