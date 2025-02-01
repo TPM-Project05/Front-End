@@ -71,6 +71,7 @@ module.exports = {
     addVariablesForColors,
     require('daisyui'),
     heroui(),
+    require('tailwind-scrollbar-hide'),
   ],
 };
 

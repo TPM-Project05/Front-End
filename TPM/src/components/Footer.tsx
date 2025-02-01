@@ -5,10 +5,13 @@ import { FaInstagram, FaFacebookF, FaLinkedinIn, FaWhatsapp } from "react-icons/
 import { IoLocationOutline, IoCallOutline } from "react-icons/io5";
 import { MdOutlineEmail } from "react-icons/md";
 import BNCC from "../assets/BNCC.png";
-import Swal from 'sweetalert2';
 import { ShootingStars } from "@/components/ui/shooting-stars";
 import { StarsBackground } from "@/components/ui/stars-background";
 import { FaXTwitter } from "react-icons/fa6";
+import { motion } from "framer-motion";
+import starBg from "../assets/Star Background.png";
+import React, { useState } from "react";
+import axios from "../config/instance"; // Import axios untuk API call
 
 const footerNavigation = {
   Explore: [
@@ -34,18 +37,40 @@ const footerNavigation = {
 };
 
 export default function Footer() {
+  const [email, setEmail] = useState(""); // State untuk menyimpan email
+  const [isSubmitting, setIsSubmitting] = useState(false); // State untuk menangani loading
+  const [isSuccess, setIsSuccess] = useState(false); // State untuk menangani animasi sukses
 
-  const handleButtonClick = () => {
-    Swal.fire({
-      title: 'Subscribed!',
-      text: 'You have successfully subscribed.',
-      icon: 'success',
-      confirmButtonText: 'Okay',
-    });
+  const handleSubscribe = async () => {
+    if (!email) {
+      alert("Please enter your email.");
+      return;
+    }
+
+    setIsSubmitting(true); // Mulai loading
+
+    try {
+      // Kirim data ke API
+      const response = await axios.post("/subscribe", { email });
+      if (response.status === 200) {
+        setIsSuccess(true); // Tampilkan animasi sukses
+        setTimeout(() => setIsSuccess(false), 2000); // Reset animasi setelah 2 detik
+      }
+      
+    } catch (error) {
+      console.error("Error subscribing:", error);
+    } finally {
+      setIsSubmitting(false); // Selesai loading
+    }
   };
 
   return (
     <div className="bg-[#17116B] overflow-hidden">
+      <motion.img
+        src={starBg}
+        className="absolute opacity-90 z-10 w-full pointer-events-none h-[620px]"
+        alt="Moon"
+      />
       <footer aria-labelledby="footer-heading" className="h-[640px]">
         <div className="mx-[40px]">
           <div className="mx-10 flex justify-between h-[350px]">
@@ -82,14 +107,20 @@ export default function Footer() {
                             type="email"
                             placeholder="Your Email"
                             className="rounded-[20px] w-[340px] h-[40px] text-black placeholder-white border border-white"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                           />
                         </div>
 
                         {/* Subscribe button on the right */}
                         <div className="flex items-center pl-2">
-                          <ShimmerButton className="shadow-2xl" onClick={handleButtonClick}>
+                          <ShimmerButton
+                            className="shadow-2xl"
+                            onClick={handleSubscribe}
+                            disabled={isSubmitting || isSuccess}
+                          >
                             <span className="whitespace-pre-wrap text-center text-sm font-medium leading-none tracking-tight text-white dark:from-white dark:to-slate-900/10">
-                              Subscribe
+                              {isSubmitting ? "Subscribing..." : isSuccess ? "Subscribed!" : "Subscribe"}
                             </span>
                           </ShimmerButton>
                         </div>

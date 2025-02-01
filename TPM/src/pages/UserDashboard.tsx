@@ -17,13 +17,26 @@ import axios from '../config/instance';
 import Logout from "@/components/Logout";
 import { ApiError, TeamDetails } from "@/interfaces/Types";
 import { AxiosError, AxiosResponse } from "axios";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { GoPlus } from "react-icons/go";
 
 export default function UserDashboard() {
   const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDownloading, setIsDownloading] = useState(false);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
-  // Fetch team details from the API
+  const token = localStorage.getItem("access_token");
+  useEffect(() => {
+    if (!token) {
+      navigate("/login"); // Navigasi ke halaman login
+      setTimeout(() => {
+        window.location.reload(); // Refresh halaman setelah 1 detik
+      }, 1000);
+    }
+    console.log(token, "<<<<");
+  }, [token, navigate]);
+  
   const fetchTeam = async (): Promise<TeamDetails> => {
     try {
       const response: AxiosResponse<TeamDetails> = await axios.get('/dashboard', {
@@ -43,12 +56,26 @@ export default function UserDashboard() {
       throw new Error('Error fetching users');
     }
   };
-
+  
+  const handleAddMember = () => {
+    if ((teamDetails?.members?.length ?? 0) >= 3) {
+      setIsPopupOpen(true); // Tampilkan modal jika anggota >= 3
+      return;
+    }
+    setTimeout(() => setIsPopupOpen(true), 10);
+    navigate("/add/member"); // Navigasi ke halaman tambah anggota jika anggota < 3
+  };
+  
   // Get team data
   const [teamDetails, setTeamDetails] = React.useState<TeamDetails | null>(null);
   console.log(teamDetails, '<<<<<');
-  
 
+  const closePopup = () => {
+    setIsPopupOpen(false);
+    setTimeout(() => setIsPopupOpen(false), 300);
+  };
+  
+  
   React.useEffect(() => {
     fetchTeam().then((data) => setTeamDetails(data)).catch((error) => console.error(error));
   }, []);
@@ -121,20 +148,25 @@ export default function UserDashboard() {
               <div className="flex justify-between pt-4">
                 <div className="flex justify-normal items-center gap-2">
                   <IoDocumentTextOutline size={24} />
-                  <p className="font-poppins">CV</p>
+                  <p className="font-poppins">Birth Date</p>
                 </div>
-                <a href={teamDetails?.leader.cv} target="_blank" className="font-poppins text-blue-500">
-                  View CV
+                <a 
+                  href={`http://127.0.0.1:8000/files/${teamDetails?.leader?.cv}`}
+                  className="font-poppins text-white underline cursor-pointer"
+                  disabled={isDownloading} // Menonaktifkan link saat sedang mendownload
+                >
+                  {isDownloading ? "Downloading..." : "CV"}
                 </a>
               </div>
+
 
               <div className="flex justify-between pt-4">
                 <div className="flex justify-normal items-center gap-2">
                   <IoDocumentTextOutline size={24} />
-                  <p className="font-poppins">ID/Binusian Card</p>
+                  <p className="font-poppins ">ID/Binusian Card</p>
                 </div>
-                <a href={teamDetails?.leader.flazz_card} target="_blank" className="font-poppins text-blue-500">
-                  View ID
+                <a href={`http://127.0.0.1:8000/files/${teamDetails?.leader?.flazz_card}`} className="text-white underline cursor-pointer">
+                  Id Card
                 </a>
               </div>
             </div>
@@ -142,7 +174,7 @@ export default function UserDashboard() {
         </div>
 
         <div className="flex flex-col gap-3">
-        <div className="w-[505px] h-[310px] border border-1 bg-white bg-opacity-20 mr-[30px] rounded-[16px]">
+        <div className="w-[505px] h-[310px] border-1 bg-white bg-opacity-20 mr-[30px] rounded-[16px]">
           <div className="pt-[30px] pl-[32px]">
             <p className="text-white font-medium text-2xl font-poppins">Timeline</p>
                 <div className="w-80 pt-5">
@@ -174,8 +206,8 @@ export default function UserDashboard() {
                             <FaCircle />
                             </div>
                             <div className="text-sm  text-white">
-                                <p className="text-[16px]">Close Registration</p>
-                                <p className="text-[12px]">11 June 2025</p>
+                                <p className="text-[16px]">Technical Meeting</p>
+                                <p className="text-[12px]">12 June 2025</p>
                             </div>
                         </li>
                     </ul>
@@ -183,8 +215,8 @@ export default function UserDashboard() {
                         <li className="relative flex gap-6 pb-4">
                             <FaCircle />
                             <div className="text-sm  text-white">
-                                <p className="text-[16px]">Close Registration</p>
-                                <p className="text-[12px]">11 June 2025</p>
+                                <p className="text-[16px]">Competetion Day</p>
+                                <p className="text-[12px]">13 - 15 June 2025</p>
                             </div>
                         </li>
                     </ul>
@@ -194,18 +226,37 @@ export default function UserDashboard() {
 
           <div className="w-[505px] h-[150px] border border-1 bg-white bg-opacity-20 rounded-[16px]">
             <div className="px-[20px] py-[15px]">
-              <div className="flex justify-between pb-2">
-                <p className="text-white font-medium text-2xl font-poppins">Team Members</p>
-                <button 
-                onClick={() => navigate("/add/member")}
-                className="border border-1 w-[150px] rounded-[16px] bg-white bg-opacity-20">
-                  <div className="flex justify-between px-[8px]">
-                    <GoPlus size={24}/>
-                    <p className="text-[16px]">Add Member</p>
-                  </div>
-                </button>
-              </div>
+            <div className="flex flex-col">
+      <div className="flex justify-between pb-2">
+        <p className="text-white font-medium text-2xl font-poppins">Team Members</p>
+        <button
+          onClick={handleAddMember}
+          className="border-1 w-[150px] rounded-[16px] bg-white bg-opacity-20"
+        >
+          <div className="flex justify-between px-[8px]">
+            <GoPlus size={24} />
+            <p className="text-[16px]">Add Member</p>
+          </div>
+        </button>
+      </div>
 
+      {/* Popup */}
+      {isPopupOpen && (
+        <div
+          className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 z-50 transition-opacity duration-300 ease-in-out"
+        >
+          <div className="bg-[#3D2C8D] rounded-xl shadow-xl p-6 w-[300px] text-center transition-transform duration-300 ease-in-out transform scale-100">
+            <p className="text-lg font-medium mb-4">Maximum 3 members allowed!</p>
+            <button
+              onClick={closePopup}
+              className="mt-4 px-4 py-2 bg-[red-500] text-white rounded-[10px] hover:bg-red-600 border-1"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
               {/* Menampilkan data member */}
               {[...((teamDetails?.members) ?? []), ...Array(3 - ((teamDetails?.members?.length ?? 0))).fill(null)].map((member, index) => (
                 <div key={index} className="flex justify-between">
@@ -223,6 +274,8 @@ export default function UserDashboard() {
           alt="Cloud"
         />
       </div>
+
+      
 
       <div className="flex flex-col absolute z-20 ml-[80px] pointer-events-auto">
         <div className=" flex justify-normal gap-3 mt-[40px]">

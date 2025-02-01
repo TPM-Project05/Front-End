@@ -13,7 +13,7 @@ import awan from "../assets/Cloud Hero Section.png";
 import { motion } from "motion/react";
 import { AxiosError } from 'axios';
 
-export default function EditMember() {
+export default function EditLeader() {
     const { id } = useParams<{ id: number }>();
     const navigate = useNavigate();
     const [selectedDate, setSelectedDate] = useState(null);
@@ -54,7 +54,7 @@ export default function EditMember() {
             };
 
             const response = await axios.put(
-                `/admin/members/${id}`,
+                `/admin/leaders/${id}`,
                 payload,
                 {
                     headers: {
@@ -234,6 +234,31 @@ export default function EditMember() {
             </div>
         </div>
 
+        {/* Flazz Card Upload */}
+        {/* <div className="flex flex-col pt-3">
+                            <p>Flazz Card</p>
+                            <div className="flex items-center bg-white border rounded-[8px] w-[380px] h-[60px]">
+                                <input
+                                    type="file"
+                                    onChange={(e) => handleFileChange(e, "flazzCard")}
+                                    className="px-3 py-2 rounded-l-md text-gray-600 text-xl"
+                                />
+                            </div>
+                        </div> */}
+
+                        {/* CV Upload */}
+                        {/* <div className="flex flex-col pt-3">
+                            <p>CV</p>
+                            <div className="flex items-center bg-white border rounded-[8px] w-[380px] h-[60px]">
+                                <input
+                                    type="file"
+                                    onChange={(e) => handleFileChange(e, "cv")}
+                                    className="px-3 py-2 rounded-l-md text-gray-600 text-xl"
+                                />
+                            </div>
+                        </div> */}
+
+                        {/* Error Message */}
                         {errorMessage && (
                                     <div className="text-red-500 text-sm mt-2 whitespace-pre-line">
                                         {errorMessage}

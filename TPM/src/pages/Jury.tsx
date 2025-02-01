@@ -1,4 +1,3 @@
-import nathasa from "../assets/nathasa.jpg";
 import nathasa2 from "../assets/nathasa2.jpg";
 import nathasa3 from "../assets/nathasa3.jpg";
 import { motion } from "framer-motion";
@@ -8,7 +7,7 @@ import AuroraLeft from "../assets/Aurora Left.png"
 const Jury = () => {
   // Array of objects that combines name, image, and position
   const data = [
-    { name: "Nathasa", position: "Cloud Specialist", image: nathasa },
+    { name: "Nathasa", position: "Cloud Specialist", image: nathasa2 },
     { name: "Nathasa 2", position: "CTO", image: nathasa2 },
     { name: "Nathasa 3", position: "CFO", image: nathasa3 },
   ];

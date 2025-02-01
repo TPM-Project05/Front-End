@@ -14,7 +14,7 @@ export default function Price() {
             />
             <motion.img
                 src={awan}
-                    className="absolute mt-[675px] z-[10] pointer-events-none w-full" 
+                    className="absolute mt-[655px] z-[10] pointer-events-none w-full h-[300px]" 
                 alt="Moon"
             />
             {/* Star Prize 1 */}

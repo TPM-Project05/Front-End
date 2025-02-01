@@ -105,7 +105,7 @@ const HalamanAwal = () => {
                         Empowering Change Through Innovation
                     </p>
                     <button 
-                        onClick={() => navigate('/Login')} 
+                        onClick={() => navigate('/register')} 
                         className="h-[50px] w-[230px] border b-1 bg-[#3D2C8D] rounded-[8px] shadow-xl 
                     hover:bg-[#050046] hover:shadow-2xl transition-all duration-300">
                         <p className="text-center">

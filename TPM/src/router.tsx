@@ -5,30 +5,80 @@ import Example from "./pages/Example";
 import { AuroraBackground } from "./components/ui/aurora-background";
 import AuroraBack from "./pages/Aurora";
 import UserDashboard from "./pages/UserDashboard";
-import EditMember from "./pages/EditMember";
+import EditLeader from "./pages/EditLeader";
 import TeamList from "./pages/TeamList";
 import Login from "./pages/Login";
 import Register from "./pages/register";
-import InputTeam from "./pages/InputTeam";
 import FetchData from "./pages/FetchData";
 import AddMember from "./pages/AddMember";
 import axiosInstance from "../src/config/instance";
 import { LoginResponse } from "./interfaces/Types";
+import InputTeam from "./pages/InputTeam";
+import EditMember from "./pages/EditMember";
+import EditTeam from "./pages/EditTeam";
 
 const token: string | null = localStorage.getItem("access_token");
 
 // Auth middleware for home
-const authHome = () => {
+const authHome = async (): Promise<Response | null> => {
   if (!token) {
     return redirect("/login");
   } 
+
+  
+  try {
+    const response = await axiosInstance.get<LoginResponse>("/user",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
+    const userRole = response.data.team.role;
+
+    if (userRole === "admin") {
+      return redirect("/adminPanel")
+    }
+  } catch (error) {
+    console.error("Error verifying admin role:", error);
+    return redirect("/login");
+  }
+
   return null;
 };
 
-const authLogin = () => {
+const authLeader = async (): Promise<Response | null> => {
+  if (!token) {
+    return redirect("/login");
+  } 
+  try {
+    const response = await axiosInstance.get<LoginResponse>("/user",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
+    const leader = response.data.team.leader_id;
+
+    if (leader === null) {
+      return null
+    } else {
+      redirect("/dashboard");
+    }
+  } catch (error) {
+    console.error("Error verifying admin role:", error);
+    return redirect("/login");
+  }
+
+  return null;
+};
+
+const authLogin = async (): Promise<Response | null> => {
   if (token) {
     return redirect("/dashboard");
   } 
+
   return null;
 };
 
@@ -62,7 +112,8 @@ const authAdmin = async (): Promise<Response | null> => {
 const routes: RouteObject[] = [
   {
     path: "/",
-    element: <Home />,
+    element: <Home/>,
+    loader: authLogin
   },
   {
     path: "/coba",
@@ -79,10 +130,19 @@ const routes: RouteObject[] = [
   {
     path: "/dashboard",
     element: <UserDashboard />,
+    loader: authHome
   },
   {
-    path: "/edit",
+    path: "/edit/leader/:id",
+    element: <EditLeader />,
+  },
+  {
+    path: "/edit/member/:id",
     element: <EditMember />,
+  },
+  {
+    path: "/edit/team/:id",
+    element: <EditTeam />,
   },
   {
     path: "/teamList",
@@ -100,10 +160,6 @@ const routes: RouteObject[] = [
 
   },
   {
-    path: "/inputteam",
-    element: <InputTeam />,
-  },
-  {
     path: "/adminPanel",
     element: <TeamList />, // Admin panel page
     loader: authAdmin,
@@ -112,10 +168,15 @@ const routes: RouteObject[] = [
     path: "/add/member",
     element: <AddMember />,
   },
-    {
-      path: '/register',
-      element: <Register />
-    },
+  {
+    path: '/register',
+    element: <Register />
+  },
+  {
+    path: '/add/leader',
+    element: <InputTeam/>,
+    loader: authLeader
+  }
 ];
 
 const router = createBrowserRouter(routes);

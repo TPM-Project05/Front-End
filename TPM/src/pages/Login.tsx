@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaEye, FaEyeSlash, FaLock, FaUser } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
@@ -19,6 +19,8 @@ const Login = () => {
     showPassword: false,
     error: '',
   });
+
+  
 
   // Handle input change for email and password
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -47,13 +49,12 @@ const Login = () => {
         password: formData.password,
       });
 
-      if (response.status === 200) {
+      console.log('Login successful, navigating to dashboard');
         // Successful login, redirect to dashboard or home
-        navigate('/dashboard');
-      }
-
-      const token = response.data?.token;
-      localStorage.setItem('access_token', token);
+        
+        const token = response.data?.token;
+        localStorage.setItem('access_token', token);
+        navigate('/add/leader');
     } catch (error) {
       console.error('Login failed:', error);
       setFormData(prevState => ({
@@ -62,6 +63,17 @@ const Login = () => {
       }));
     }
   };
+
+  const token = localStorage.getItem("access_token");
+
+  useEffect(() => {
+      if (token) {
+        navigate("/dashboard"); // Navigasi ke halaman login
+        setTimeout(() => {
+          window.location.reload(); // Refresh halaman setelah 1 detik
+        }, 1000);
+      }
+    }, [token, navigate]);
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-b from-indigo-950 via-indigo-750 to-indigo-600 w-full bg-cover bg-center relative">
@@ -186,7 +198,7 @@ const Login = () => {
             <p className="text-red-500 text-center mb-4">{formData.error}</p>
           )}
 
-          <button type="submit" className="bg-gradient-to-b from-indigo-950 via-indigo-750 to-indigo-600 text-white rounded p-2 mt-4 w-full">Sign In</button>
+          <button onClick={() => navigate("/dashboard")} type="submit" className="bg-gradient-to-b from-indigo-950 via-indigo-750 to-indigo-600 text-white rounded p-2 mt-4 w-full">Sign In</button>
           
           <p className="text-center text-white mt-4">
             Don't have an account? <Link to="/Register" className="text-white hover:underline text-glow">Sign Up</Link>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import timeline from "../assets/Property 1=Default.png"
 const Timeline = () => {
   const [hoveredPoint, setHoveredPoint] = useState(null);
 
@@ -25,9 +25,8 @@ const Timeline = () => {
   };
 
   return (
-    <div className="w-[1280px] h-[832px] bg-[#17116B] relative">
-      <svg className="w-full h-full">
-        {/* Base lines */}
+    <div className="w-[1280px] h-[700px] flex justify-center items-center">
+      {/* <svg className="w-full h-full">
         {lines.map((line, index) => (
           <React.Fragment key={index}>
             <line
@@ -55,7 +54,6 @@ const Timeline = () => {
           </React.Fragment>
         ))}
 
-        {/* Hover lines - menampilkan kedua garis sekaligus */}
         {hoveredPoint && hoverLines[hoveredPoint] && (
           <>
             {hoverLines[hoveredPoint].map((line, index) => (
@@ -71,7 +69,6 @@ const Timeline = () => {
               />
             ))}
 
-            {/* Dots at the end of hover lines */}
             {hoverLines[hoveredPoint].map((line, index) => (
               <circle
                 key={index}
@@ -86,7 +83,11 @@ const Timeline = () => {
             ))}
           </>
         )}
-      </svg>
+      </svg> */}
+      <div className="flex justify-center items-center h-screen">
+  <img src={timeline} alt="Timeline" className="pointer-events-none" />
+</div>
+
     </div>
   );
 };

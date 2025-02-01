@@ -10,6 +10,7 @@ import Price from "./Prize";
 import About from "./About";
 import HalamanAwal from "./HalamanAwal";
 import MediaPartner from "./MediaPartner";
+import Timeline from './Timeline';
 
 
 export default function Home() {
@@ -22,6 +23,7 @@ export default function Home() {
             <div id="catatan"><Catatan/></div>
             <div id="jury"><Jury/></div>
             <div id="imageslider"><ImageSlider/></div>
+            <div id="timeline"><Timeline/></div>
             <div id="faqs"><Faq/></div>
             <div id="sponsor"><Sponsor/></div>
             <MediaPartner/>  
